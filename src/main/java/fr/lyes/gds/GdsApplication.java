@@ -16,11 +16,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class GdsApplication implements CommandLineRunner {
+public class GdsApplication  extends SpringBootServletInitializer {
     /*	@Autowired
 	private UserService userService;
     	@Autowired
@@ -38,7 +39,7 @@ public class GdsApplication implements CommandLineRunner {
         SpringApplication.run(GdsApplication.class, args);
     }
 
-    @Override
+   /* @Override
     public void run(String... args) throws Exception {
         System.setProperty("webdriver.gecko.driver","C:\\Users\\Karim\\Desktop\\Lyes\\sel\\geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
@@ -47,7 +48,7 @@ public class GdsApplication implements CommandLineRunner {
         driver.findElement(By.id( "password")).sendKeys("*****");
         WebElement btn = driver.findElement(By.id("login"));
         btn.submit();
-
+*/
         //moduleService.save(new ModuleDto("ADMIN01","ADMIN01","ADMIN01"));
        // moduleService.save(new ModuleDto("ADMIN02","ADMIN02","ADMIN02"));
        // moduleService.save(new ModuleDto("ADMIN03","ADMIN03","ADMIN03"));
@@ -66,5 +67,5 @@ public class GdsApplication implements CommandLineRunner {
        // userService.addGroupeToUser("admin","Stock");
        // userService.addGroupeToUser("admin","Produit");
      //   userService.addGroupeToUser("admin","DashBoard");
-    }
+  //  }
 }

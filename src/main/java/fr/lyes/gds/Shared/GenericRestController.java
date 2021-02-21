@@ -41,8 +41,6 @@ public class GenericRestController<S extends GenericService<?, O, T>, O extends 
 	@GetMapping(value = "/lazy/{page}/{size}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public List<O> lazyList(@PathVariable(value = "page") Integer page, @PathVariable(value = "size") Integer size) {
 		listAll = service.findAll(PageRequest.of(page, size));
-		System.out.println("size : " + size + " -page : " + page);
-		System.out.println(listAll.size());
 		return listAll;
 	}
 
@@ -50,8 +48,6 @@ public class GenericRestController<S extends GenericService<?, O, T>, O extends 
 	public List<O> LazySorterList(@PathVariable(value = "page") Integer page,
                                   @PathVariable(value = "size") Integer size, @PathVariable(value = "sort") String sort,
                                   @PathVariable(value = "field") String field) {
-		System.out.println("size : " + size + " -page : " + page + " -sort : " + sort);
-		System.out.println(service.findAll(PageRequest.of(page, size, Sort.by(Direction.ASC, field))).size());
 		if (sort.equals("ASC"))
 			listAll = service.findAll(PageRequest.of(page, size, Sort.by(Direction.ASC, field)));
 		else
@@ -62,7 +58,6 @@ public class GenericRestController<S extends GenericService<?, O, T>, O extends 
 	public List<O> LazySorterListMultiple(@PathVariable(value = "page") Integer page,
 								  @PathVariable(value = "size") Integer size,
 								  @PathVariable(value = "field") String field) {
-		System.out.println("size : " + size + " -page : " + page+"prop"+field);
 		listAll = service.findAll(PageRequest.of(page, size,Sort.by(field)));
 		return listAll;
 	}
@@ -70,7 +65,6 @@ public class GenericRestController<S extends GenericService<?, O, T>, O extends 
 	public @ResponseBody
     O create(@RequestBody O entity) {
 		if (nullCheck(entity)) {
-			System.out.println("post000");
 			listAll.add(entity);
 			return service.save(entity);
 		}

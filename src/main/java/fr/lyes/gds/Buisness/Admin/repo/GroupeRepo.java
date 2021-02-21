@@ -30,7 +30,6 @@ public class GroupeRepo implements Serializable {
         if (code == null
                 && label == null
                 && active == null) {
-            System.out.println("all param are null");
         } else {
             st.append("where");
             if (code != null && !code.equals("")) {
@@ -122,7 +121,6 @@ public class GroupeRepo implements Serializable {
         long total = (long) coun.getSingleResult();
         q.setFirstResult(first * max);
         q.setMaxResults(max);
-        System.out.println("sort" + sort);
         return new PageImpl<Groupe>(q.getResultList(), PageRequest.of(first, max, Sort.by(Sort.Direction.DESC, field)), total);
     }
 

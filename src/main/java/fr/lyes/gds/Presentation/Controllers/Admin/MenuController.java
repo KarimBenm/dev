@@ -32,7 +32,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/menus")
+@RequestMapping("/gds/menus")
 public class MenuController implements Serializable {
 
     @Autowired

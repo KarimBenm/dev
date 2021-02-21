@@ -126,7 +126,6 @@ public class MenuRepo implements Serializable {
         } else {
             st.append("where");
             if (label != null && !label.equals("")) {
-                System.out.println("in");
                 if (st.toString().endsWith("where")) {
                     st.append(" menu.label =:label");
                 } else {
