@@ -1,0 +1,79 @@
+.example-full-width {
+    width: 50%;
+  }
+  .example-form {
+    min-width: 50em;
+    max-width: 75em;
+    width: 100%;
+  }
+  .editDialogue{
+    min-width: 50em;
+    max-width: 75em;
+    width: 100%;
+  }
+  .groupeChip{
+      margin-left: 0.3125em;
+  }
+  .mat-dialog-actions{
+    margin-top: 3em;
+  }
+  .test{
+    margin-top: 0em !important;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .toolbarHeader{
+    background-color: #4682b4;
+    color: white;
+    min-width: 100%;
+    width: 100%;
+  }
+  .infoContainer{
+      margin-top: 0.625em;
+      height: 12.5em;
+  }
+  .example-couleur{
+      margin-left: 3.125em;
+    width: 50%;
+  }
+  .couleur{
+      margin-left: 20em;
+  }
+
+  .closed{
+     background-color: white;
+     box-shadow: none;
+     border: white;
+     box-sizing:unset;
+     border-radius: 0px;
+     width: 1.5em;
+     height: 1.875em;
+     max-width: 1.5em;
+     min-width: 1.5em;
+     margin-top: -3.125em;
+  }
+  .closeIcon{
+    margin-left: -0.3125em;
+    box-sizing: unset;
+    border: white;
+    background-color: white;
+    font-size: 20px;
+  }
+  ::after, ::before {
+    box-sizing:unset;
+}
+select {
+  box-sizing:unset;
+  border: white;
+}
+#cancel{
+    background-color: #4682b4;
+     color: white;
+}
+.groupeChips{
+  margin-top: 50px;
+}
+.chipList{
+  margin-left: 50px;
+}

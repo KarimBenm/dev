@@ -1,0 +1,68 @@
+<form class="example-form">
+  <mat-dialog-actions align="end">
+    <button button class="closed" mat-dialog-close>
+      <mat-icon class="closeIcon">clear</mat-icon>
+    </button>
+  </mat-dialog-actions>
+  <mat-toolbar class="toolbarHeader">
+    <mat-icon>menu</mat-icon>
+    <span> User Information :</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <div class="form-group" style="margin-left: 20px;
+        margin-top: 10px;">
+    <div class="col-6" style="margin-left: -35px;">
+      <img class="img-fluid" style="width: 50%; height:50%;" [src]="user.profilImage">
+    </div>
+    <br>
+  </div>
+  <mat-form-field class="example-full-width">
+    <mat-label>UserName</mat-label>
+    <input matInput disabled [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>FirstName</mat-label>
+    <input matInput disabled [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>LastName</mat-label>
+    <input matInput disabled [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <!-- <mat-label>Groupe :</mat-label>
+    <mat-chip class="groupeChip" *ngFor="let couleur of couleurs" color="primary">
+      {{couleur.value}}
+    </mat-chip> -->
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input matInput disabled [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Active</mat-label>
+    <input matInput disabled value="{{getTest()}}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Adresse</mat-label>
+    <textarea [rows]="2" [cols]="50" matInput matInput disabled [(ngModel)]="user.address"
+      [ngModelOptions]="{standalone: true}" autoResize="autoResize"></textarea>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Date of Birth</mat-label>
+    <input matInput disabled [(ngModel)]="user.dateNaissance" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Gender</mat-label>
+    <input matInput disabled [(ngModel)]="user.sexe" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Groupes</mat-label>
+  <mat-chip-list class="mat-chip-list-stacked" aria-label="Groupe selection">
+    <mat-chip readOnly *ngFor="let chip of user.appGroupeList" selected>
+      {{chip.code}}
+    </mat-chip>
+  </mat-chip-list>
+</mat-form-field>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button style="background-color: #4682b4; color: white;" mat-dialog-close>
+      Cancel</button>
+  </mat-dialog-actions>
+</form>

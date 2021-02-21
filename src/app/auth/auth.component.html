@@ -1,0 +1,59 @@
+<div class="auth">
+  <div class="crediential">
+      <img src="{{url}}" class="img" [src]="url">
+      <div class="titreContainer">
+          <p class="titre">Connexion</p>
+      </div>
+      <form class="cred" [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)" >
+          <div class="form-group mail">
+            <mat-form-field>
+              <mat-label style="font-weight: bold;font-size: 20px; color: aliceblue;">Username</mat-label>
+              <input matInput formControlName="username"  class="form-control"
+                     placeholder="Ex. pat@example.com">
+              <mat-hint style="font-weight: bold;font-size: 13px; color: aliceblue;">please provide username!</mat-hint>
+              <mat-error  style="font-weight: bold;font-size: 13px; color:		black;" *ngIf="!loginForm.controls['username'].valid&&loginForm.controls['username'].dirty">
+                Please enter a valid username
+              </mat-error>
+              <mat-error  style="font-weight: bold;font-size: 10px; color: 			black;" *ngIf="checkLength()">
+               <strong>Minimum 4 caractère</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group password">
+             <mat-form-field>
+                    <mat-label style="font-weight: bold;font-size: 20px; color: aliceblue;">Mot de passe</mat-label>
+                    <input matInput  type="password" formControlName="password"  class="form-control" 
+                           placeholder="Ex. pat@example.com">
+                    <mat-hint style="font-weight: bold;font-size: 13px; color: aliceblue;">please provide  password</mat-hint>
+                    <mat-error  style="font-weight: bold;font-size: 10px; color: black;"  *ngIf="!loginForm.controls['password'].valid&&loginForm.controls['password'].dirty">
+                      Please enter a valid password
+                    </mat-error>
+                    <mat-error  style="font-weight: bold;font-size: 13px; color: black;" *ngIf="checkLength()">
+                     <strong>Minimum 4 caractère</strong>
+                    </mat-error>
+                  </mat-form-field>
+              <div >
+                </div>
+          </div>
+          <div class="action">
+              <div class="row">
+                  <button mat-raised-button
+                       id="login" type="submit" [disabled]="!loginForm.valid">
+                       LogIn
+                        <mat-icon>forward</mat-icon>
+                      </button>
+                    <button mat-raised-button (click)="onSignUp()" id="signUp">SignUp 
+                        <mat-icon>how_to_reg</mat-icon>
+                    </button>
+              </div>
+          </div>
+          <div class="copy">
+              <p class="copyright">Karim || @2020</p>
+          </div>
+      </form>
+  </div>
+  <div class="loginFooter">
+      Entreprise d'Appui au Développement du Numérique | EADN | © 2020.
+  </div>
+
+</div>

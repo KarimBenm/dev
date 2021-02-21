@@ -1,0 +1,155 @@
+<div class="auth">
+  <div class="crediential">
+    <div class="titreContainer">
+      <p class="titre">SignUp</p>
+    </div>
+    <form class="cred" autocomplete="off" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+      <mat-horizontal-stepper #stepper linear style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+      "  >
+        <mat-step class="step" formGroupName="loginInfo" #step1  [hasError]="!isLoggedInFilled()"  label ="Login Info" state="logIn"  errorMessage="inputs are required.">
+          <div class="row" style="margin-left: 20px;">
+            <div class="form-group">
+              <mat-form-field class="formField">
+                <mat-label class="labelClass">Email</mat-label>
+                <input id="laim" matInput formControlName="userMail"  required class="form-control">
+                <mat-error *ngIf="signUpForm.get('loginInfo.userMail').hasError('required')">
+                  Username is required!
+              </mat-error>
+                <mat-hint class="HintClass">please provide an email!</mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="form-group password" style="margin-left: 50px;">
+              <mat-form-field class="formField">
+                <mat-label class="labelClass">Password</mat-label>
+                <input id="password" matInput formControlName="password" required autocomplete="off" class="form-control"
+                  type="password">
+                <!-- <mat-hint class="labelClass">please provide a Password!</mat-hint>
+                <mat-error class="labelClass"
+                  *ngIf="!signUpForm.get['loginInfo.password'].valid&&signUpForm.get['loginInfo.password'].dirty">
+                  Please enter a valid Password
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="form-group password" style="margin-left: 50px;">
+              <mat-form-field class="formField">
+                <mat-label class="labelClass">Confirmation</mat-label>
+                <input type="password" matInput formControlName="confPass" required name="confPass" style="height: 38px;" />
+                <!-- <mat-hint class="labelClass">please provide a confirmation
+                  Password!</mat-hint>
+                <mat-error class="labelClass"
+                  *ngIf="!signUpForm.get['loginInfo.confPass'].valid&&signUpForm.get['loginInfo.confPass'].dirty">
+                  Please enter a valid Password
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperNext type="button" class="nextStep">Next</button>
+          </div>
+        </mat-step>
+        <mat-step formGroupName="civility" label ="Civility" #step2 state="civility"  [hasError]="!isCivilityFilled()"  errorMessage="inputs are required.">
+          <div class="row" style="margin-left: 20px;">
+            <div class="form-group">
+              <mat-form-field class="formField">
+                <mat-label class="labelClass">FirstName</mat-label>
+                <input type="text" matInput formControlName="userfirstName" required name="UserfirstName" />
+              </mat-form-field>
+            </div>
+            <div class="form-group" style="margin-left: 50px;">
+              <mat-form-field class="formField">
+                <mat-label class="labelClass">LastName</mat-label>
+                <input type="text" matInput formControlName="userLastName" name="UserLastName" />
+              </mat-form-field>
+            </div>
+            <div class="form-group" style="margin-left: 50px;">
+              <mat-form-field class="formField" style="width: 200px;">
+                <mat-label class="labelClass">Gender</mat-label>
+                    <mat-select class="matSelect"    name="gender" formControlName="gender"
+                    class="labelClass">
+                    <mat-select-trigger>{{getSelectValue()}}</mat-select-trigger>
+                      <mat-option
+                        *ngFor="let gender of genders" [value]="gender">
+                        <mat-icon>{{gender.icon}}</mat-icon>
+                        {{gender.code}} 
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+            <div class="form-group" style="width: 90%;">
+              <mat-form-field class="example-full-width">
+                <mat-label class="labelClass">Adresse</mat-label>
+                <textarea [rows]="2" [cols]="50" matInput formControlName="userAdresse" autoResize="autoResize"
+                  name="userAdresse"></textarea>
+              </mat-form-field>
+              <mat-form-field class="example-full-width" style="width: 200px;">
+                <mat-label class="labelClass">Date of Birth</mat-label>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dateNaissance">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious type="button" class="previousStep" >Back</button>
+            <button mat-button matStepperNext type="button" class="nextStep">Next</button>
+          </div>
+        </mat-step>
+        <mat-step formGroupName="accountOptions"   #step3 [hasError]="!isAccountOptionsFilled()" label ="Account Settings" state="settings" errorMessage="inputs are required.">
+          <div class="row inputRows">
+            <div class="form-group">
+              <mat-form-field class="formField">
+                <mat-label class="labelClass">UserName</mat-label>
+                <input type="text" autocomplete="off" matInput class="form-control" formControlName="userName"
+                  name="UserName" style="height: 38px;" />
+              </mat-form-field>
+            </div>
+          </div> 
+          <div class="row" style="margin-left: 20px;">
+            <div class="form-group" style="margin-left: -50px;
+                  ">
+              <div style="margin-left: -50px;">
+                <img class="img-fluid" style="width: 50%; height: 90%; margin-left: 80px;" [src]="url" alt="image">
+              </div>
+              <br>
+              <div class="col-6">
+                <input type="file" #imagePath placeholder="image" (change)="onFileChange($event)" class="input-file"
+                  style="width: 90%; height: 70%;margin-left: 50px;" accept="image/*" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious type="button" class="previousStep">Back</button>
+            <button mat-button matStepperNext type="button"  class="nextStep">Next</button>
+          </div>
+        </mat-step>
+        <mat-step label ="Finish" state="finish">
+          <p>You are now done.</p>
+          <div class="action">
+            <div class="row">
+              <button mat-raised-button type="button" class="login" [disabled]="!signUpForm.valid" id="signUp"
+                type="submit">
+                <mat-icon [hidden]="!signUpForm.valid" class="signUpIcon">forward</mat-icon>
+                Create
+              </button>
+              <button mat-button matStepperPrevious class="previousStep">Back</button>
+            <button mat-button (click)="stepper.reset()" class="nextStep">Reset</button>
+            </div>
+           </div>
+   </mat-step>
+   <ng-template matStepperIcon="logIn">
+    <mat-icon>verified_user</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="civility">
+    <mat-icon>info</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="settings">
+    <mat-icon>perm_data_setting</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="finish">
+    <mat-icon>check_circle</mat-icon>
+  </ng-template>
+   </mat-horizontal-stepper>
+    </form>
+  </div>
+
+</div>

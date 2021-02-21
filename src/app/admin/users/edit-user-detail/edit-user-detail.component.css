@@ -1,0 +1,132 @@
+
+.cred{
+    margin-top: 0.1%;
+    position: absolute;
+    right: 450px;
+    width: 600px;
+    border-radius: 0;
+    background-color: #FFF;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.16), 0 0 2px 0 rgba(0,0,0,.12); 
+}
+#changePass{
+margin-top: 30px;
+margin-bottom: 30px;
+background-color: #4682b4;
+color: white;
+position: absolute;
+top : 200px;
+}
+.changePs{
+    width: 450px; 
+    margin-bottom: 30px;
+    border-radius: 0;
+    background-color: #FFF;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.16), 0 0 2px 0 rgba(0,0,0,.12);
+    position: absolute;
+    left: 0px;
+    top : 101% ;
+}
+.labelClass{
+    font-weight: bold;
+    font-size: 20px; 
+    color: black;   
+}
+.toolbarHeader{
+    background-color: #4682b4;
+    margin-left: -10px;
+    color: white;
+    min-width: 100%;
+    width: 100%;
+  }
+  .toolbarPass{
+    background-color: #4682b4;
+    color: white;
+    min-height: 50%;
+    height: 50%;
+    min-width: 100%;
+    width: 100%;
+  }
+  .toolbarUser{
+    background-color: #4682b4;
+    margin-left: 2px !important;
+    color: white;
+    min-height: 50%;
+    height: 50%;
+    min-width: 99.5%;
+    width: 99.5%;
+  }
+  #edit{
+    background-color: #4682b4;
+    color: white;
+    position: absolute;
+    width: 105px;
+    top: 40px;
+    right : 150px;
+  }
+  #cancel{
+    background-color: #4682b4;
+    color: white;
+    position: absolute;
+    top:40px;
+  }
+  .closed{
+    background-color: white;
+    box-shadow: none;
+    border: white;
+    box-sizing:unset;
+    border-radius: 0px;
+    width: 24px;
+    height: 30px;
+    max-width: 24px;
+    min-width: 24px;
+    margin-top: -30px;
+ }
+ .closeIcon{
+   margin-left: -5px;
+   box-sizing: unset;
+   border: white;
+   background-color: white;
+   font-size: 20px;
+ }
+ .HintClass{
+    font-weight: bold;font-size: 13px; color: black;   
+ }
+ .formContent{
+align-content: center;
+height:1000px;
+width: 1200px;
+max-height: 80%;
+min-height: 800px;
+ }
+ .formFields{
+     margin-right: 100px;
+ }
+ .action{
+     margin-left: 500px;
+ }
+ .left {
+  position: absolute;
+  left: 400px;
+  margin-top: 20px;
+  width: 450px;
+  border-radius: 0;
+  background-color: #FFF;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.16), 0 0 2px 0 rgba(0,0,0,.12); 
+}
+.right {
+  position: absolute;
+  right: 0px;
+  width: 300px;
+  border-radius: 0;
+    background-color: #FFF;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.16), 0 0 2px 0 rgba(0,0,0,.12); 
+}
+.editMDP{
+  position: absolute;
+  top : 450px;
+}
+.input-file{
+  position: absolute;
+  left: 400px;
+  top : 590px;
+}

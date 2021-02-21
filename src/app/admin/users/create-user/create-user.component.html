@@ -1,0 +1,161 @@
+<div class="auth">
+  <mat-toolbar class="toolbarHeader">
+    <mat-icon>menu</mat-icon>
+    <span>Create User:</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <form class="cred" autocomplete="off" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+    <mat-vertical-stepper [linear]="false" #stepper>
+      <mat-step formGroupName="loginInfo"  #step1 
+      errorMessage="inputs are required." [hasError]="!isLoggedInFilled()" label="Login Info" state="logIn"   >
+        <div class="row inputRows">
+          <div class="form-group">
+            <mat-form-field class="formField">
+              <mat-label class="labelClass">Email</mat-label>
+              <input id="laim" matInput formControlName="userMail" class="form-control">
+              <mat-hint class="HintClass">please provide an email!</mat-hint>
+              <!-- <mat-error class="labelClass"
+                *ngIf="!signUpForm.get['loginInfo.userMail'].valid&&signUpForm.get['loginInfo.userMail'].dirty">
+                Please enter a valid email
+              </mat-error>
+              <mat-error class="labelClass" *ngIf="checkLength()">
+                <strong>Minimum 4 caractère</strong>
+              </mat-error> -->
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <button mat-button matStepperNext type="button" class="previous">Next</button>
+        </div>
+      </mat-step>
+      <mat-step errorMessage="inputs are required." [hasError]="!isCivilityFilled()" formGroupName="civility" [stepControl]="civility" label="Civility" #step2 state="civility"
+      >
+        <div class="row inputRows">
+          <div class="form-group">
+            <mat-form-field class="formField">
+              <mat-label class="labelClass">FirstName</mat-label>
+              <input type="text" matInput formControlName="userfirstName" name="UserfirstName" />
+            </mat-form-field>
+          </div>
+          <div class="form-group" style="margin-left: 50px;">
+            <mat-form-field class="formField">
+              <mat-label class="labelClass">LastName</mat-label>
+              <input type="text" matInput formControlName="userLastName" name="UserLastName" />
+            </mat-form-field>
+          </div>
+          <div class="form-group" style="margin-left: 50px;">
+            <mat-form-field class="formField" style="width: 200px;">
+              <mat-label class="labelClass">Gender</mat-label>
+              <mat-select class="matSelect" name="gender" formControlName="gender" class="labelClass">
+                <mat-select-trigger>{{getSelectValue()}}</mat-select-trigger>
+                <mat-option *ngFor="let gender of genders" [value]="gender">
+                  <mat-icon>{{gender.icon}}</mat-icon>
+                  {{gender.code}}
+                </mat-option>
+                <!-- <mat-select-trigger *ngIf="gender">
+                      <mat-icon>{{gender.icon}}</mat-icon>&nbsp;{{gender.code}}
+                   </mat-select-trigger> -->
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group" style="width: 90%;">
+            <mat-form-field class="example-full-width" style="width: 400px;">
+              <mat-label class="labelClass">Adresse</mat-label>
+              <textarea [rows]="2" [cols]="50" matInput formControlName="userAdresse" autoResize="autoResize"
+                name="userAdresse"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" style="margin-left: 260px;width: 200px;">
+              <mat-label class="labelClass">Date of Birth</mat-label>
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dateNaissance">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious type="button" class="previous">Back</button>
+          <button mat-button matStepperNext type="button" class="previous">Next</button>
+        </div>
+      </mat-step>
+      <mat-step errorMessage="inputs are required." [hasError]="!isAccountOptionsFilled()" formGroupName="accountOptions"  #step3 
+        label="Account Settings" state="settings">
+        <div class="row inputRows">
+          <div class="form-group" style="margin-right: 50px;">
+            <mat-form-field>
+              <mat-label class="labelClass">Groupes</mat-label>
+              <mat-select class="matSelect" formControlName="groupes" name="groupes" multiple class="labelClass">
+                <mat-option class="labelClass" *ngFor="let groupe of groupes" [value]="groupe">{{groupe.code}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label class="labelClass">Active?</mat-label>
+              <mat-select formControlName="valid" name="valid">
+                <mat-option>None</mat-option>
+                <mat-option value="Actif" class="labelClass">Actif</mat-option>
+                <mat-option value="blocked" class="labelClass">blocked</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row inputRows">
+          <div class="form-group">
+            <mat-form-field class="formField">
+              <mat-label class="labelClass">UserName</mat-label>
+              <input type="text" autocomplete="off" matInput class="form-control" formControlName="userName"
+                name="UserName" style="height: 38px;" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row inputRows">
+          <div class="form-group" style="margin-left: -50px;
+                ">
+            <div style="margin-left: -50px;">
+              <img class="img-fluid" style="width: 50%; height: 90%; margin-left: 80px;" [src]="url" alt="image">
+            </div>
+            <br>
+            <div class="col-6">
+              <input type="file" #imagePath placeholder="image" (change)="onFileChange($event)" class="input-file"
+                style="width: 90%; height: 70%;margin-left: 50px;" accept="image/*" />
+            </div>
+          </div>
+        </div>
+        <div>
+          <button mat-button matStepperPrevious type="button" class="previous">Back</button>
+          <button mat-button matStepperNext type="button" class="previous">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Finish" state="finish">
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div class="action">
+          <div class="row inputRows">
+            <button mat-raised-button type="button" class="login" [disabled]="!signUpForm.valid" id="signUp"
+              type="submit">
+              <mat-icon [hidden]="!signUpForm.valid" class="signUpIcon">forward</mat-icon>
+              Create
+            </button>
+            <button mat-button matStepperPrevious class="previous">Back</button>
+            <button mat-button (click)="stepper.reset()" class="previous">Reset</button>
+          </div>
+        </div>
+      </mat-step>
+      <ng-template matStepperIcon="logIn">
+        <mat-icon>verified_user</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="civility">
+        <mat-icon>info</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="settings">
+        <mat-icon>perm_data_setting</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="finish">
+        <mat-icon>check_circle</mat-icon>
+      </ng-template>
+    </mat-vertical-stepper>
+  </form>
+  <!-- <div class="crediential">
+  </div> -->
+</div>

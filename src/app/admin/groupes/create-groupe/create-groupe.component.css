@@ -1,0 +1,27 @@
+.toolbarHeader{
+    background-color: #4682b4;
+    color: white;
+    min-width: 100%;
+    width: 120%;
+    margin-left: -40px;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .inputRows{
+    margin-left: 20px;
+    }
+    .rightInput{
+        margin-left: 20px
+        ;
+    }
+    .example-card{
+        margin-left: 20px;
+        margin-top: 50px;
+        width: 90%;
+    }
+    .activeCheckBox{
+        display: inline !important;
+        margin-right: 50px;
+    }
+ 

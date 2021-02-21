@@ -1,0 +1,177 @@
+.auth{
+    margin-left: 450px;
+    margin-top: 150px;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+    padding: 40px;
+    width: 1000px;
+    height: 800px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+.crediential{
+    margin-top: 200px;
+    margin-left: 20px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+/deep/ .mat-select-value-text{
+    color: aliceblue;
+ }
+ /deep/ .mat-form-field-autofill-control{
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;  
+ }
+ /deep/ .cdk-text-field-autofill-monitored{
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;  
+ }
+ /deep/ .cdk-text-field-autofilled{
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;
+ }
+ 
+
+ /deep/ .form-control{
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;
+ }
+ /deep/ .mat-input-element{
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;
+ }
+.titre{
+    color: white;
+    margin-left: 80px;
+}
+.row{
+    margin-top: 20px;
+}
+.titre{
+    font-style: oblique;
+    font-weight: bolder;
+    font-size: 35px ;
+    color: white;
+    display: inline-block;
+    margin-left: 10px;
+    width: 89%;
+    text-align: center;
+}
+.labelClass{
+    font-weight: bold;font-size: 20px; color: aliceblue;   
+}
+.HintClass{
+    font-weight: bold;font-size: 13px; color: aliceblue;   
+}
+.titreContainer{
+    margin-top: -50px;
+}
+
+.float{
+    font-weight: 700 !important;
+    color: #333; 
+    font-size: 17px !important;
+}
+.floatt{
+    font-weight: 700 !important;
+    color:white; 
+    font-size: 17px !important;
+}
+.form-control:focus{
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;
+}
+.form-control:default{
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;
+}
+.form-control::before{
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    color: aliceblue !important;
+    -webkit-text-fill-color: aliceblue;
+    -webkit-text-size-adjust: 20px;
+    font-weight: bold;
+    transition: background-color 50000s ease-in-out 0s;
+ 
+}
+
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+    color: aliceblue !important;
+    transition: background-color 50000s ease-in-out 0s;
+    -webkit-text-fill-color: aliceblue;
+ 
+}
+
+input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-color: transparent !important;
+    border: none !important;
+    color: aliceblue !important;
+}
+.example-full-width{
+    width: 100%;
+}
+#signUp{
+    width: 300px;
+    margin-right: 20px;
+    font-size:2rem;
+    background-color: #007ad9;
+    border: 1px solid #007ad9;
+    height: 50px;
+  font-weight:bold;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:white;
+}
+.signUpIcon{
+    font-size: 55px;
+    color: #ffffff;
+    margin-right: 50px;
+    margin-left: -40px;
+    margin-top: -30px;
+    text-align: center; 
+}
+#signUp:disabled{
+    color: #ccc;
+    cursor: no-drop;
+ }
+ .previousStep{
+background-color: aliceblue;
+margin-right: 20px;
+ }
+ .inputRows{
+    margin-left: 20px;
+    }
+ .nextStep{
+    background-color: aliceblue;  
+}
+.step{
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: bold;
+}
+/deep/ .mat-horizontal-stepper-header{
+    color: aliceblue !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+/deep/ .mat-step-header .mat-step-label {
+    color: aliceblue !important;
+    font-size: 15px !important;
+    font-weight: bold !important;   
+}

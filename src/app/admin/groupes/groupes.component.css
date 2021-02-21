@@ -1,0 +1,192 @@
+.childContainer{
+    margin: 0.3125em;
+    border: solid 1px #4682b4;
+    box-shadow: none;
+
+}
+.tableModule{
+    width: 100%;
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, .12);
+    font-size: 12px;
+    background-color: #fff;
+}
+.tableHeaders{
+  font-weight: 700;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .toolbarHeader{
+    background-color: #4682b4;
+    color: white;
+  }
+.toolbarFilters{
+    margin-top: 1.25em;
+    background-color: #4682b4;
+    color: white;  
+}
+.tableTitle{
+    margin-top: 1.25em;
+
+}
+.example-action-buttons{
+    margin-left:37.5em;
+}
+#add{
+    color: white;
+    border-color: white;
+}
+
+ #info{
+    margin-left: 12.5em;
+    margin-right: 0.5em;  
+    background-color: #4682b4;
+    }
+#edit{
+    background-color: #4682b4;
+    margin-right: 0.5em;   
+}
+#delete{
+    background-color: #4682b4;
+    margin-right: 0.5em; 
+}
+.filtre{
+    font-size: 13px;
+    color: #fff;
+    margin-left: 34.375em;
+    text-shadow: none;
+    position: relative;
+    background-color: #1dabbe;
+    font-weight: 500;
+    border: 0;
+}
+.clear{
+    font-size: 13px;
+    color: #fff;
+    margin-left: 3.125em;
+    text-shadow: none;
+    position: relative;
+    background-color: #1dabbe;
+    font-weight: 500;
+    border: 0;
+}
+.expandFilter {
+    margin-left: 6.25em;
+}
+#chip{
+    background-color: #4682b4 !important;
+    width: 50% !important;
+    color: white !important;  
+}
+
+.activeHeader{
+margin-left: 6.25em;
+font-weight: 700;
+}
+.actionContainer{
+  margin-left: 33.125em;
+   padding-left: 8.125em;
+}
+.actionHeader{
+  margin-left: 37.5em;
+  padding-left:16.25em;
+  font-weight: 700;
+}
+.actionRow{
+  margin-left: 12.5em;
+  padding-left: 1.25em;
+}
+.activeDiv{
+    font-size : 1.25em;
+    width: 90%;
+    color : white; 
+    text-align: center;
+    font-weight: bold;
+}
+.activeContainer{
+    margin-left: 33.125em;
+     padding-left: 8.125em;
+    }
+.actionContainer{
+  margin-left: 33.125em;
+  padding-left: 8.125em;
+}
+.actionHeader{
+    margin-left: 37.5em;
+    padding-left:16.25em;
+    font-weight: 700;
+}
+.actionColumn{
+    margin-left: 12.5em;
+    padding-left: 1.25em; 
+}
+.profileImage{
+    width: 50%;
+}
+.profileImageCell{
+    width: 20%;
+    height: 40%;
+}
+.spinner-container{
+ margin-left: 50em;
+ margin-top: 25em;
+}
+
+tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  .toolbarChips{
+    margin-top: 1.25em;
+    background-color: #4682b4;
+    color: white;  
+    width: 300%;
+  }
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-element-diagram {
+    min-width: 5em;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  .groupeMenusChips{
+      width: 300%;
+    border: 2px solid  #4682b4;
+  }
+  .groupeChips{
+      margin-left: 1.25em;
+  }
+  .chip{
+      background-color: whitesmoke;
+  }
+  .example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  .example-element-description {
+    padding: 1em;
+  }
+  
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }

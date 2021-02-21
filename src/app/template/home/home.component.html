@@ -1,0 +1,36 @@
+<app-header *ngIf="isLoggedIn$" [img]="imgPro"></app-header>
+<div class="card" style="border: none;display: -webkit-box !important; height: -webkit-fill-available;
+background: rgb(2,0,36);
+background: linear-gradient(to right, #4e54c8, #8f94fb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+">
+  <div class="appModulesContainer">
+    <mat-grid-list cols="4" rowHeight="200px">
+    <mat-grid-tile (click)="goWithRouter(module.urls)" *ngFor="let module of datasource" [ngStyle]="{'background-color': module.color}" class="appModules"  [colspan]="module.col"
+    [rowspan]="module.raw" >
+    <a class="nav-link" (click)="goWithRouter(module.urls)" 
+        style="
+        cursor: pointer;">
+          <mat-icon style="    font-size: 80px;
+          color: #ffffff;
+          margin-left: -10px;
+        text-align: center;">{{module.icon}}</mat-icon>
+        </a>
+      <div class="modCaption" >
+        {{module.label}}
+      </div>  
+   </mat-grid-tile>
+   <mat-grid-tile [colspan]="2"  class="appLogout"
+   [rowspan]="1">
+   <a class="navLink" style="cursor: pointer;"    [ngStyle]="{'background-color': 'white'}">
+    <mat-icon style="font-size: 80px;
+    color: #ffffff;
+    margin-left: -10px;
+  text-align: center;">assignment_return</mat-icon>
+  </a>
+  <div class="modCaption" >
+   Logout
+  </div>
+   </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

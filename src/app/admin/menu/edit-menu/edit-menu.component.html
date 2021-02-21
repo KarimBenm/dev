@@ -1,0 +1,78 @@
+<div class="editDialogue">
+  <mat-dialog-actions class="test" align="end">
+    <button button class="closed"  mat-dialog-close>
+      <mat-icon class="closeIcon">clear</mat-icon>
+     </button>
+  </mat-dialog-actions>
+  <mat-toolbar class="toolbarHeader">
+    <mat-icon>menu</mat-icon>
+    <span>Menu Information :</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <form class="cred"  (ngSubmit)="onEditMenu()">
+  <div class="infoContainer">
+    <mat-form-field class="example-full-width">
+      <mat-label>Url</mat-label>
+      <input matInput disabled [(ngModel)]="menu.urls" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Label</mat-label>
+    <input matInput disabled [(ngModel)]="menu.label" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>IsParent</mat-label>
+    <input matInput disabled [(ngModel)]="menu.parents" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <div class="row">
+    <mat-label>Icon :</mat-label>
+    <mat-icon class="icon" style="font-size: 50px;
+      margin-left: 10px;
+    text-align: center;">{{menu.icon}}</mat-icon>
+
+  </div>
+  <div class="row groupeChips">
+    <mat-label>Groupes :</mat-label>
+    <mat-chip-list class="mat-chip-list-stacked chipList" aria-label="sousMenu">
+      <mat-chip *ngFor="let groupe of menu.menuGroupeList" readonly selected id="chip" >
+        {{groupe.code}}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <mat-label>Sous Menu :</mat-label>
+   <div class="form-group" style="margin-right:100px; margin-left: 30px;">
+            <mat-form-field class="example-full-width">
+              <mat-label>Menu</mat-label>
+              <mat-chip-list #chipList aria-label="Menu selection">
+                <mat-chip  *ngFor="let sousMenu of menu.sousMenuList" 
+                [selectable]="selectable"
+                [removable]="true"
+                (removed)="remove(sousMenu)">
+                {{sousMenu.label}}
+                <mat-icon matChipRemove >cancel</mat-icon>
+                </mat-chip>
+                <input
+                placeholder="New Menu..."
+                #sousMenuInput
+                [formControl]="menuCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let susmenu of filteredMenus | async" [value]="susmenu">
+                  {{susmenu.label}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button id="edit" type="submit">
+    <mat-icon>edit</mat-icon>
+    Edit
+  </button>
+  <button mat-raised-button id="cancel"  mat-dialog-close> Cancel</button>
+</mat-dialog-actions>
+</form>
+ </div>

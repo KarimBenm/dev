@@ -1,0 +1,80 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-toolbar class="toolbarHeader">
+      <mat-icon>menu</mat-icon>
+      <span>Add Groupe</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>  </mat-card-header>
+  <mat-card-content>
+    <form class="cred" autocomplete="off" [formGroup]="CreateGroupForm" (ngSubmit)="onCreate()">
+          <div class="row inputRows">
+            <div class="form-group">
+              <mat-form-field class="formField">
+                <mat-label class="labelClass">Code</mat-label>
+                <input id="laim" name="code" matInput formControlName="code" class="form-control">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="rightInput">
+                <mat-label class="labelClass">Label</mat-label>
+              <input type="text" autocomplete="off" matInput class="form-control" formControlName="label"
+                name="label"/>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row inputRows">
+            <div class="form-group">
+                  <mat-checkbox class="activeCheckBox" 
+                  (change)="onChange($event)" 
+                name="active">Active?</mat-checkbox>
+                  <mat-slide-toggle  [(checked)]="act" ></mat-slide-toggle>
+            </div>
+          </div>
+       
+          <div class="row inputRows">
+            <div class="form-group" style="margin-right: 50px;">
+              <mat-form-field>
+                <mat-label class="labelClass">Groupes</mat-label>
+                <mat-select class="matSelect"  formControlName="module" name="module"  class="labelClass">
+                  <mat-option class="labelClass" *ngFor="let module of modules" [value]="module">{{module.code}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <mat-label>Menu :</mat-label>
+            <div class="form-group" style="margin-right:100px; margin-left: 50px;">
+                     <mat-form-field class="example-full-width">
+                       <mat-label>Menu</mat-label>
+                       <mat-chip-list #chipList aria-label="Menu selection">
+                         <mat-chip  *ngFor="let groupe of selectedMenus" 
+                         [selectable]="selectable"
+                         [removable]="true"
+                         (removed)="remove(groupe)">
+                         {{groupe.label}}
+                         <mat-icon matChipRemove >cancel</mat-icon>
+                         </mat-chip>
+                         <input
+                         placeholder="New Groupe..."
+                         #groupeInput
+                         [formControl]="fruitCtrl"
+                         [matAutocomplete]="auto"
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         (matChipInputTokenEnd)="add($event)">
+                       </mat-chip-list>
+                       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                         <mat-option *ngFor="let groupe of filteredGroupes | async" [value]="groupe">
+                           {{groupe.label}}
+                         </mat-option>
+                       </mat-autocomplete>
+                     </mat-form-field>
+              </div>
+          </div>
+          <mat-card-actions>
+            <button  mat-raised-button type="submit"  color="primary">Create</button>
+            <button mat-raised-button color="warn" >Cancel</button>
+          </mat-card-actions>
+    </form>
+  </mat-card-content>
+   
+</mat-card>

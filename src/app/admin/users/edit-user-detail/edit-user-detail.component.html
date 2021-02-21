@@ -1,0 +1,175 @@
+<mat-dialog-content class="formContent" *ngIf="user">
+  <mat-dialog-actions align="end">
+    <button button class="closed" mat-dialog-close>
+      <mat-icon class="closeIcon">clear</mat-icon>
+    </button>
+  </mat-dialog-actions>
+  <mat-toolbar class="toolbarHeader">
+    <mat-icon>menu</mat-icon>
+    <span>Edit User:</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+    <div class="left">
+      <img class="img-fluid" style="width: 100%; height:50%;" [src]="url" alt="image">
+      <div class="col-6">
+        <input type="file" #imagePath placeholder="image" (change)="onFileChange($event)"
+          style="width: 90%; height: 70%;margin-left: 50px;" accept="image/*" />
+      </div>
+      <div class="changePs" *ngIf="changePass">
+        <mat-toolbar class="toolbarPass">
+          <mat-icon>lock_open</mat-icon>
+          <span>Edit Password:</span>
+          <span class="example-spacer"></span>
+        </mat-toolbar>
+        <div class="row" style="margin-left: 50px; margin-top: 20px;">
+          <div style="margin-right: 20px;">
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" [(ngModel)]="newPass" placeholder="NewPassword" name="NewPass">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-label>Confirmer password</mat-label>
+              <input matInput type="password" [(ngModel)]="confPass" placeholder="Confirm Password" name="confPass">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="cred" [formGroup]="signUpForm" (ngSubmit)="onEditUser()">
+      <mat-toolbar class="toolbarUser">
+        <mat-icon>supervised_user_circle</mat-icon>
+        <span>User Informations:</span>
+        <span class="example-spacer"></span>
+      </mat-toolbar>
+      <div class="row" style="margin-top: 20px; margin-left: 20px;">
+        <mat-form-field class="formFields">
+          <mat-label class="labelClass">Email</mat-label>
+          <input id="laim" matInput formControlName="userMail" class="form-control">
+          <mat-error class="HintClass"
+            *ngIf="!signUpForm.controls['userMail'].valid&&signUpForm.controls['userMail'].dirty">
+            Please enter a valid email
+          </mat-error>
+          <mat-error class="HintClass" *ngIf="checkLength()">
+            <strong>Minimum 4 caractère</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label class="labelClass">UserName</mat-label>
+            <input type="text" autocomplete="off" matInput class="form-control" formControlName="userName"
+              name="UserName" style="height: 38px;" />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="formFields">
+            <mat-label class="labelClass">FirstName</mat-label>
+            <input type="text" matInput formControlName="userfirstName" name="UserfirstName" />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label class="labelClass">LastName</mat-label>
+            <input type="text" matInput formControlName="userLastName" name="UserLastName" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-group" style="margin-left: 20px;">
+        <mat-form-field class="formField" style="width: 200px;">
+        <mat-label class="labelClass">{{gendre.code}}</mat-label>
+         <mat-select class="matSelect" name="gender" formControlName="gender"  [(value)]="gendre.code" class="labelClass">
+           <mat-select-trigger>{{getSelectValue()}}</mat-select-trigger>
+           <mat-option *ngFor="let gender of genders" [value]="gender">
+             <mat-icon>{{gender.icon}}</mat-icon>
+             {{gender.code}}
+           </mat-option>
+         </mat-select>
+        </mat-form-field>
+       <mat-form-field class="example-full-width" style="margin-left:80px;">
+         <mat-label class="labelClass">Date of Birth</mat-label>
+         <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dateNaissance">
+         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+         <mat-datepicker #picker></mat-datepicker>
+       </mat-form-field>
+     </div>
+      <div class="row">
+        <div class="row">
+          <div class="form-group" style="margin-right:100px; margin-left: 50px;">
+            <mat-form-field class="example-full-width">
+              <mat-label>Groupes</mat-label>
+              <mat-chip-list #chipList aria-label="Groupe selection">
+                <mat-chip  *ngFor="let groupe of user.appGroupeList" 
+                [selectable]="selectable"
+                [removable]="true"
+                (removed)="remove(groupe)">
+                {{groupe.code}}
+                <mat-icon matChipRemove >cancel</mat-icon>
+                </mat-chip>
+                <input
+                placeholder="New Groupe..."
+                #groupeInput
+                [formControl]="fruitCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let groupe of filteredGroupes | async" [value]="groupe">
+                  {{groupe.code}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <!-- <mat-form-field >
+                <mat-label class ="labelClass">Groupes</mat-label>
+                <mat-select class="matSelect" formControlName="groupes" name="groupes" multiple
+                class ="labelClass">
+                  <mat-option class ="labelClass" *ngFor="let groupe of groupes"
+                    [value]="groupe">{{groupe.code}}</mat-option>
+                </mat-select>
+              </mat-form-field> -->
+          </div>
+          <mat-form-field>
+            <mat-label>Active?</mat-label>
+            <mat-select formControlName="userValid" [(value)]="selectedState">
+              <mat-option>None</mat-option>
+              <mat-option value="Actif">Actif</mat-option>
+              <mat-option value="blocked">blocked</mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <div class="form-group" style="width: 90%;margin-bottom: 30px;">
+            <mat-form-field class="example-full-width"
+              style="margin-left: 40px;width:550px !important;min-width: 550px !important;">
+              <mat-label class="labelClass">Adresse</mat-label>
+              <textarea [rows]="2" [cols]="50" matInput formControlName="userAdresse" autoResize="autoResize"
+                name="userAdresse" style="width:550px !important;min-width: 550px !important;"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    <div class="editMDP" style="margin-left: 10px;">
+      <button label="Password" mat-raised-button id="changePass" type="button" (click)="onChangePass()">
+        <mat-icon>lock</mat-icon>
+      </button>
+    </div>
+   
+    <div class="action">
+      <div class="row">
+        <div class="col-6">
+          <button mat-raised-button id="edit" type="submit">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <mat-dialog-actions align="end">
+            <button id="cancel" mat-raised-button mat-dialog-close>
+              <mat-icon>arrow_back</mat-icon>
+              Cancel
+            </button>
+          </mat-dialog-actions>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>

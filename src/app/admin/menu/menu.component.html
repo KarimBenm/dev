@@ -1,0 +1,177 @@
+<div class="childContainer">
+  <mat-toolbar class="toolbarHeader">
+    <mat-icon>menu</mat-icon>
+    <span>Menu</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <mat-toolbar class="toolbarFilters">
+    <mat-icon>menu</mat-icon>
+    <span>Filters</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <div class="example-action-buttons">
+    <button mat-button (click)="accordion.openAll()">Display Filters
+      <mat-icon>
+        add_circle
+      </mat-icon>
+    </button>
+    <button mat-button (click)="accordion.closeAll()">Hide Filters
+      <mat-icon>
+        remove_circle
+      </mat-icon>
+    </button>
+  </div>
+  <!-- #docregion multi -->
+  <mat-accordion class="example-headers-align" multi>
+    <!-- #enddocregion multi -->
+    <mat-expansion-panel >
+      <div class="expandFilter">
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Label</mat-label>
+            <input matInput type="text" [(ngModel)]="label">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>url</mat-label>
+            <input matInput type="text" [(ngModel)]="url">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Parent?</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="hasChild">has Child</mat-option>
+              <mat-option value="alone">Alone</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- <div class="col-3">
+          <mat-form-field>
+            <mat-label>Couleur</mat-label>
+            <mat-select [formControl]="couleurControl" name="couleur">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let couleur of couleurs" [value]="couleur.value" [ngStyle]="{'color': couleur.value}">
+                {{couleur.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+      </div>
+      <button mat-fab class="filtre" (click)="applyFilters($event)">
+        <mat-icon>
+          filter_list
+        </mat-icon>
+      </button>
+    </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="mat-elevation-z8">
+    <mat-toolbar class="toolbarFilters">
+      <mat-icon>menu</mat-icon>
+      <span>Modules List : </span>
+      <span class="example-spacer"></span>
+      <button id="add"  mat-stroked-button color="primary" (click)="onCreate()">
+        <mat-icon>library_add</mat-icon>
+        Ajouter
+      </button>
+    </mat-toolbar>
+    <table class="tableModule" multiTemplateDataRows mat-table [dataSource]="dataSource" matSort>
+      <!-- Progress Column -->
+      <ng-container matColumnDef="label">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: 700;"> Label </th>
+        <td mat-cell *matCellDef="let row"> {{row.label}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: 700;"> Url
+          <!-- <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+          </mat-form-field> -->
+        </th>
+        <td mat-cell *matCellDef="let row"> {{row.urls}} </td>
+      </ng-container>
+       <ng-container matColumnDef="groupe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: 700;"> Groupes </th>
+        <td mat-cell *matCellDef="let row"> 
+          <mat-chip-list class="mat-chip-list-stacked" aria-label="sousMenu">
+          <mat-chip *ngFor="let groupe of row.menuGroupeList" readonly selected id="chip" >
+            {{groupe.code}}
+          </mat-chip>
+        </mat-chip-list>
+       </td>
+      </ng-container> 
+      <!-- Icon Column -->
+      <ng-container matColumnDef="icon">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-weight: 700;"> Icon </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-icon style="font-size: 20px;
+          color: #595959;
+          text-align: center;">{{row.icon}}</mat-icon>
+        </td>
+      </ng-container>
+      <!-- Color Column -->
+      <ng-container matColumnDef="parent" class="activeContainer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeaders"> Parent </th>
+        <td mat-cell *matCellDef="let row">
+          <div class="activeDiv" [ngStyle]="{'backgroundColor': getColor(row)
+       }">{{getTest(row)}}</div>
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="action" style="margin-left: 530px; padding-left: 130px;">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          style="margin-left: 600px;padding-left:260px;font-weight: 700;"> Actions </th>
+        <td mat-cell *matCellDef="let row" style="margin-left: 200px;padding-left: 20px;">
+          <button id="info" (click)="openViewDialog(row)"  mat-mini-fab style="margin-left: 200px;
+        margin-right: 8px;    background-color: #4682b4;
+">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button id="edit" (click)="openEditDialog(row)"  mat-mini-fab>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button id="delete"  mat-mini-fab>
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let row" class="expanded">
+          <div class="example-element-detail" [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
+            <mat-toolbar class="toolbarChips">
+              <mat-icon>menu</mat-icon>
+              <mat-label>Sous Menu List :</mat-label>
+              <div class="SousMenuChips">
+                <!-- <div> {{row.label}} </div> -->
+                <mat-chip-list #chipList aria-label="Groupe selection">
+                  <mat-chip class="chip" *ngFor="let sousMenu of row.sousMenuList"> {{sousMenu.label}}
+                  </mat-chip>
+                </mat-chip-list>
+                <span class="example-spacer"></span>
+              </div>
+            </mat-toolbar>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === row"
+      (click)="expandedElement = test(row)"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"  [length]="totalElements"
+    ></mat-paginator> 
+  </div>
+</div>
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

@@ -1,0 +1,162 @@
+<div class="childContainer">
+  <div class="course">
+    <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>
+  <mat-toolbar class="toolbarHeader">
+    <mat-icon>menu</mat-icon>
+    <span>Users</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <mat-toolbar class="toolbarFilters">
+    <mat-icon>menu</mat-icon>
+    <span>Filters</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <div class="example-action-buttons">
+    <button mat-button (click)="accordion.openAll()">Display Filters
+      <mat-icon>
+        add_circle
+      </mat-icon>
+    </button>
+    <button mat-button (click)="accordion.closeAll()">Hide Filters
+      <mat-icon>
+        remove_circle
+      </mat-icon>
+    </button>
+  </div>
+  <!-- #docregion multi -->
+  <mat-accordion class="example-headers-align" multi>
+    <!-- #enddocregion multi -->
+    <mat-expansion-panel >
+      <div class="expandFilter">
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>User Name</mat-label>
+            <input matInput type="text" [(ngModel)]="userName">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text" [(ngModel)]="lastName">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" [(ngModel)]="firstName" >
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="text" [(ngModel)]="email" >
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Active?</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="Actif">Actif</mat-option>
+              <mat-option value="blocked">blocked</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <button mat-fab class="filtre" (click)="applyFilters($event)">
+        <mat-icon>
+          filter_list
+        </mat-icon>
+      </button>
+      <button mat-fab class="clear" (click)="clearFilters($event)">
+        <mat-icon> clear_all</mat-icon>
+      </button>
+    </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="mat-elevation-z8">
+    <mat-toolbar class="toolbarFilters">
+      <mat-icon>menu</mat-icon>
+      <span>Users List : </span>
+      <span class="example-spacer"></span>
+      <button id="add"  mat-stroked-button color="primary" (click)="onCreate()">
+        <mat-icon>library_add</mat-icon>
+        Ajouter
+      </button>
+    </mat-toolbar>
+    <table class="tableModule" mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeaders"> User Name
+        </th>
+        <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+      </ng-container>
+      <!-- Progress Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeaders"> Last Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeaders"> First Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeaders"> Email </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeaders"> Date Naissance </th>
+        <td mat-cell *matCellDef="let row"> {{row.dateNaissance}} </td>
+      </ng-container>
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeaders"> Profile Image </th>
+        <td mat-cell class="profileImageCell" *matCellDef="let row"><img src={{row.profilImage}}  [src]="row.profilImage" alt="{{row.username}}" class="profileImage"> </td>
+      </ng-container>
+      <ng-container matColumnDef="active" class="activeContainer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeaders"> Active </th>
+        <td mat-cell *matCellDef="let row">
+          <div class="activeDiv" [ngStyle]="{'backgroundColor': getColor(row)
+       }">{{getTest(row)}}</div>
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="action" class="actionContainer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="actionHeader"
+         > Actions </th>
+        <td mat-cell *matCellDef="let row" class="actionColumn">
+          <button id="info" (click)="openViewDialog(row)" class="infoButton"  mat-mini-fab>
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button id="edit" (click)="openEditDialog(row)"  mat-mini-fab>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button id="delete"  mat-mini-fab>
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <!-- <mat-paginator 
+    [length]="dataSource.page$.totalElements" [pageSize]="dataSource.page$.size"
+    [pageIndex]="dataSource.page$.number" [hidePageSize]="true" 
+    (page)="dataSource.page$.fetch($event.pageIndex)">
+  </mat-paginator> -->
+     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"  [length]="totalElements"
+    ></mat-paginator> 
+  </div>
+</div>
+
+
+     
+     

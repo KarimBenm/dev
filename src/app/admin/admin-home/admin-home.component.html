@@ -1,0 +1,16 @@
+<app-header *ngIf="user"></app-header>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
+    [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom">
+    <mat-nav-list>
+      <a mat-list-item (click)="goWithRouter(nav.urls)" style="    border-top: 1px solid #d2e0f2;
+      cursor: pointer;" routerLink="." *ngFor="let nav of fillerNav">
+        <mat-icon style="    font-size: 20px;
+          color: #595959;
+          text-align: center;">{{nav.icon}}</mat-icon>
+          {{nav.label}}
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <router-outlet></router-outlet>
+  

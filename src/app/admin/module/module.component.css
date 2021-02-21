@@ -1,0 +1,63 @@
+.childContainer{
+    margin: 5px;
+    border: solid 1px #4682b4;
+    box-shadow: none;
+
+}
+.tableModule{
+    width: 100%;
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, .12);
+    font-size: 12px;
+    background-color: #fff;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .toolbarHeader{
+    background-color: #4682b4;
+    color: white;
+  }
+.toolbarFilters{
+    margin-top: 20px;
+    background-color: #4682b4;
+    color: white;  
+}
+.tableTitle{
+    margin-top: 20px;
+
+}
+.example-action-buttons{
+    margin-left:550px;
+}
+  ‎#info{
+      margin-left: 8px;
+     margin-right: 8px;
+      }
+
+  #edit{
+    background-color: #4682b4;
+    margin-right: 8px;   
+}
+#delete{
+    background-color: #4682b4;
+    margin-right: 8px; 
+}
+.filtre{
+    font-size: 13px;
+    color: #fff;
+    margin-left: 650px;
+    text-shadow: none;
+    position: relative;
+    background-color: #1dabbe;
+    font-weight: 500;
+    border: 0;
+}
+.expandFilter {
+    margin-left: 100px;
+}
+#chip{
+    background-color: #4682b4 !important;
+    width: 50% !important;
+    color: white !important;  
+}

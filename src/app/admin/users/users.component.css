@@ -1,0 +1,123 @@
+.childContainer{
+    margin: 5px;
+    border: solid 1px #4682b4;
+    box-shadow: none;
+
+}
+.tableModule{
+    width: 100%;
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, .12);
+    font-size: 12px;
+    background-color: #fff;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .toolbarHeader{
+    background-color: #4682b4;
+    color: white;
+  }
+.toolbarFilters{
+    margin-top: 20px;
+    background-color: #4682b4;
+    color: white;  
+}
+.tableTitle{
+    margin-top: 20px;
+
+}
+.example-action-buttons{
+    margin-left:600px;
+}
+#add{
+    color: white;
+    border-color: white;
+}
+‎#view{
+ margin-left: 200px;
+ margin-right: 8px; 
+ background-color: #4682b4;
+      }
+.infoButton{
+    margin-left: 200px;
+    margin-right: 8px; 
+    background-color: #4682b4;
+      }
+
+#edit{
+    background-color: #4682b4;
+    margin-right: 8px;   
+}
+#delete{
+    background-color: #4682b4;
+    margin-right: 8px; 
+}
+.filtre{
+    font-size: 13px;
+    color: #fff;
+    margin-left: 550px;
+    text-shadow: none;
+    position: relative;
+    background-color: #1dabbe;
+    font-weight: 500;
+    border: 0;
+}
+.clear{
+    font-size: 13px;
+    color: #fff;
+    margin-left: 50px;
+    text-shadow: none;
+    position: relative;
+    background-color: #1dabbe;
+    font-weight: 500;
+    border: 0;
+}
+.expandFilter {
+    margin-left: 100px;
+}
+#chip{
+    background-color: #4682b4 !important;
+    width: 50% !important;
+    color: white !important;  
+}
+
+.tableHeaders{
+    margin-left: 100px;
+font-weight: 700;
+}
+.activeDiv{
+    font-size : 20px;
+    width: 70%;
+    color : white; 
+    text-align: center;
+    font-weight: bold;
+}
+.activeContainer{
+    margin-left: 530px;
+     padding-left: 130px;
+    }
+.actionContainer{
+    margin-left: 530px;
+     padding-left: 130px;
+}
+.actionHeader{
+    margin-left: 600px;
+    padding-left:260px;
+    font-weight: 700;
+}
+.actionColumn{
+    margin-left: 200px;
+    padding-left: 20px; 
+}
+.profileImage{
+    width: 50%;
+}
+.profileImageCell{
+    width: 20%;
+    height: 40%;
+}
+.spinner-container{
+ margin-left: 800px;
+ margin-top: 400px;
+}

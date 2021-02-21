@@ -1,0 +1,44 @@
+<form class="example-form">
+  <mat-dialog-actions align="end">
+    <button button class="closed"  mat-dialog-close>
+      <mat-icon class="closeIcon">clear</mat-icon>
+     </button>
+  </mat-dialog-actions>
+  <mat-toolbar class="toolbarHeader">
+    <mat-icon>menu</mat-icon>
+    <span>Module Information :</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+  <div class="infoContainer">
+  <mat-form-field class="example-full-width">
+    <mat-label>Code</mat-label>
+    <input matInput disabled [(ngModel)]="moduleViewed.code" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Label</mat-label>
+    <input matInput disabled [(ngModel)]="moduleViewed.label" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Name</mat-label>
+    <input matInput disabled [(ngModel)]="moduleViewed.name" [ngModelOptions]="{standalone: true}">
+  </mat-form-field>
+  <mat-label>Groupe :</mat-label>
+  <mat-chip class="groupeChip" *ngFor="let couleur of couleurs" color="primary">
+    {{couleur.value}}
+  </mat-chip>
+  <div class="row" style="margin-left: 5px;">
+    <mat-label>Icon :</mat-label>
+    <mat-icon class="icon" style="font-size: 50px;
+      margin-left: 10px;
+    text-align: center;">{{moduleViewed.icon}}</mat-icon>
+    <div class="couleur">
+      <mat-label>Couleur :</mat-label>
+      <input matInput readonly  [value]="moduleViewed.color" [ngStyle]="{'color': moduleViewed.color}">
+    </div>
+  </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button style="background-color: #4682b4; color: white;" mat-dialog-close>
+    Cancel</button>
+</mat-dialog-actions>
+</form>

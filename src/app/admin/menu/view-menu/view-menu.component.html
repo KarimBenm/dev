@@ -1,0 +1,57 @@
+<mat-card class="menuCard">
+  <mat-dialog-actions align="end">
+    <button button class="closed" mat-dialog-close>
+      <mat-icon class="closeIcon">clear</mat-icon>
+    </button>
+  </mat-dialog-actions>
+  <mat-card-header>
+    <mat-toolbar class="toolbarHeader">
+      <mat-icon>menu</mat-icon>
+      <span>Menu Information :</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="example-form">
+      <div class="infoContainer">
+        <mat-form-field class="example-full-width">
+          <mat-label>Label</mat-label>
+          <input matInput disabled [(ngModel)]="menuViewed.label" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Url</mat-label>
+          <input matInput disabled [(ngModel)]="menuViewed.urls" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        <div class="row chips">
+          <div class="chipsSousMenu">
+            <mat-label disabled>Sous Menu :</mat-label>
+            <mat-chip class="groupeChip" disabled *ngFor="let sousMenu of menuViewed.sousMenuList" color="primary">
+              {{sousMenu.label}}
+            </mat-chip>
+          </div>
+          <mat-label>Icon :</mat-label>
+          <mat-icon class="icon" style="font-size: 50px;    margin-top: -10px;
+      margin-left: 10px;
+    text-align: center;">{{menuViewed.icon}}</mat-icon>
+        </div>
+        <mat-toolbar class="groupeChipsHeader">
+          <mat-icon class="icon" style="font-size: 30px;    margin-top: -10px;
+      margin-left: -5px;
+    text-align: center;">group</mat-icon>
+          <div class="row groupes">
+            <mat-label class="groupeLabel">Groupes :</mat-label>
+            <mat-chip-list class="mat-chip-list-stacked gpeChips" aria-label="sousMenu">
+              <mat-chip *ngFor="let groupe of menuViewed.menuGroupeList" readonly selected id="chip">
+                {{groupe.code}}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </mat-toolbar>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-dialog-actions align="end">
+  <button mat-raised-button style="background-color: #4682b4; color: white;" mat-dialog-close>
+    Cancel</button>
+</mat-dialog-actions>

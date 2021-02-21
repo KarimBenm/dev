@@ -1,0 +1,139 @@
+.auth{
+    margin-top: 100px;
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+.crediential{
+    margin-top: 40px;
+    margin-left: 500px;
+}
+.titre{
+    color: white;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    color: black !important;
+    -webkit-text-fill-color: black;
+    -webkit-text-size-adjust: 20px;
+    font-weight: bold;
+    transition: background-color 50000s ease-in-out 0s;
+ 
+}
+.inputRows{
+margin-left: 20px;
+}
+.previous{
+    background-color: #4682b4;
+    color: white; 
+    margin-right: 20px;   
+}
+/deep/ .mat-select-value-text{
+    color: black;
+ }
+ /deep/ .mat-form-field-autofill-control{
+    background-color: transparent !important;
+    border: none !important;
+    color: black !important;  
+ }
+ /deep/ .cdk-text-field-autofill-monitored{
+    background-color: transparent !important;
+    border: none !important;
+    color: black !important;  
+ }
+ /deep/ .cdk-text-field-autofilled{
+    background-color: transparent !important;
+    border: none !important;
+    color: black !important;
+ }
+ 
+
+ /deep/ .form-control{
+    background-color: transparent !important;
+    border: none !important;
+    color: black !important;
+ }
+ /deep/ .mat-input-element{
+    background-color: transparent !important;
+    border: none !important;
+    color: black !important;
+ }
+.labelClass{
+    font-weight: bold;font-size: 20px; color: black;   
+}
+.HintClass{
+    font-weight: bold;font-size: 13px; color: black;   
+}
+.formField{
+    margin-right: 100px;
+}
+.toolbarHeader{
+    background-color: #4682b4;
+    color: white;
+    margin-left: 0px;
+    min-width: 100%;
+    width: 100%;
+  }
+  .closed{
+    background-color: white;
+    box-shadow: none;
+    border: white;
+    box-sizing:unset;
+    border-radius: 0px;
+    width: 24px;
+    height: 30px;
+    max-width: 24px;
+    min-width: 24px;
+    margin-top: -50px;
+ }
+ .closeIcon{
+   margin-left: -5px;
+   box-sizing: unset;
+   border: white;
+   background-color: white;
+   font-size: 20px;
+ }
+.row{
+    margin-top: 20px;
+}
+.titre{
+    font-style: oblique;
+    font-weight: bolder;
+    font-size: 35px ;
+    color: white;
+    display: inline-block;
+    margin-left: 10px;
+    width: 89%;
+    text-align: center;
+}
+.titreContainer{
+    margin-top: -50px;
+    margin-left: -70px;
+}
+#signUp{
+    width: 300px;
+    margin-right: 20px;
+    font-size:2rem;
+  font-weight:bold;
+  background-color: #4682b4;
+  color: white; 
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:white;
+}
+#signUp:disabled{
+    color: #ccc;
+    cursor: no-drop;
+ }
+.float{
+    font-weight: 700 !important;
+    color: #333; 
+    font-size: 17px !important;
+}
+.floatt{
+    font-weight: 700 !important;
+    color:white; 
+    font-size: 17px !important;
+}
