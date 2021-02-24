@@ -25,7 +25,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/gds/groupes")
+@RequestMapping("/groupes")
 public class GroupeController implements Serializable {
 
 

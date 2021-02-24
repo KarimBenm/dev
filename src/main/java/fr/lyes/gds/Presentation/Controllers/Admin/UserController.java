@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/gds/users")
+@RequestMapping("/users")
 public class UserController implements Serializable {
 
     @Autowired

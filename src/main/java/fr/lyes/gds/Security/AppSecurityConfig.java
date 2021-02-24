@@ -70,9 +70,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/gds/auth/**").permitAll();
-        http.authorizeRequests().antMatchers("/gds/groupes/**").permitAll();
-        http.authorizeRequests().antMatchers("/gds/users/**").permitAll();
+        http.authorizeRequests().antMatchers("/auth/**").permitAll();
+        http.authorizeRequests().antMatchers("/groupes/**").permitAll();
+        http.authorizeRequests().antMatchers("/users/**").permitAll();
         //http.authorizeRequests().antMatchers("/ManagingUsers/**").hasAuthority("Controllers");
         //http.authorizeRequests().antMatchers(HttpMethod.GET, "/listproduits/").hasAuthority("Controllers");
        // http.authorizeRequests().antMatchers(HttpMethod.POST, "/listproduits/").hasAuthority("Controllers");

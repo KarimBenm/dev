@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/gds/modules")
+@RequestMapping("/modules")
 public class ModuleController  extends GenericRestController<ModuleService, ModuleDto, Long> {
 
     @Autowired
