@@ -6,7 +6,7 @@ export const API_URLS = {
   Register_API: "http://localhost:8080/gds/auth/register",
   LOGOUT_API: "http://localhost:8080/gds/logout",
   LOGIN_API: "gds/auth/login",
-  Menus_API: "http://localhost:8080/menus",
+  Menus_API: "http://localhost:8080/gds/menus",
 
 
 

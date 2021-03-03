@@ -22,7 +22,7 @@ export class GroupeService extends GenericService<Groupe> {
     super(http, API_URLS.Groupe_API);
   }
   groupeDispo: Groupe[];
-  public host: string = "http://localhost:8080";
+  public host: string = "http://localhost:8080/gds";
 
   findModuleByGroupeCode(codeGroupe: String): Observable<Module> {
     return this.getHttpClient().get<Module>(

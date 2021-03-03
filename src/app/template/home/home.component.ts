@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
     )
   }
   public goWithRouter(routers: string) {
+    console.log("tt"+routers);
     this.router.navigate([routers]);
   }
 }
