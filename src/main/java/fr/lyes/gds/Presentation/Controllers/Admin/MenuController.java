@@ -66,7 +66,6 @@ public class MenuController implements Serializable {
     public List<Menu> listSousMenuDispo(@PathVariable(value = "menuId") Long menuId) {
         List<Menu> listMenuDispo = new ArrayList<>();
         listMenuDispo = service.findAllSousMenu(menuId);
-        System.out.println("dispo"+listMenuDispo.size());
         return service.findSousMenuExclude(menuId, listMenuDispo);
     }
 

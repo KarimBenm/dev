@@ -36,15 +36,8 @@ public class ModuleServiceImpl extends GenericServiceImpl<ModuleDao, Module,Modu
 
 	@Override
 	public List<Groupe> findByModule(String code) {
-			System.out.println("ffdg");
-			//List<Groupe> gpeList = new ArrayList<>();
-			//gpeList = dao.findGroupeOfUser(username);
 			List<Groupe> groupeList = new ArrayList<>();
 		groupeList = dao.findByModule(code);
-			System.out.println("size"+groupeList.size());
-			//gpeList.forEach(x->{
-			//	modList.add(x.getModule());
-			//});
 			return groupeList;
 	}
 
