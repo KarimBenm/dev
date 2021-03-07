@@ -30,14 +30,6 @@ bat 'xcopy /y   C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Je
 		}
     }
     stage('Deploying') {
- steps{
-     bat '''cd C:\\Users\\Karim\\Desktop\\Lyes\\recBUIld\\apache-tomcat-9.0.38\\bin 
-call .\\shutdown.bat'''
-bat '''cd C:\\Users\\Karim\\Desktop\\Lyes\\recBUIld\\apache-tomcat-9.0.38\\bin 
-call .\\startup.bat'''
-
-
-		}
     }
 
 }
