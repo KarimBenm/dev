@@ -27,7 +27,7 @@ stage('Packaging'){
 }
 	  stage('Package Build') {
 	  steps{
-bat 'xcopy /y   C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\angularProd\\dist\\GDS-front C:\\Users\\Karim\\Desktop\\Lyes\\recBUIld\\apache-tomcat-9.0.38\\webapps\\GDS-front'
+bat 'xcopy /y   C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\angularProd\\dist\\GDS-front C:\\Users\\Karim\\Desktop\\Lyes\\recBUIld\\apache-tomcat-9.0.38\\webapps\\GDS-front   /E'
 		}
     }
 }
