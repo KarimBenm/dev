@@ -5,67 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="0002-01" author="AKL">
-        <insert  catalogName="cat"
-                 schemaName="admin"
-                 tableName="menu">
-            <column  name="label"  value="module"/>
-            <column  name="urls"  value="admin/module"/>
-            <column  name="icon"  value="view_module"/>
-            <column  name="color"  value="#ffffff"/>
-            <column  name="parents"  value="false"/>
-        </insert>
 
-        <insert  catalogName="cat"
-                 schemaName="admin"
-                 tableName="menu">
-            <column  name="label"  value="menu"/>
-            <column  name="urls"  value="admin/menu"/>
-            <column  name="icon"  value="menu"/>
-            <column  name="color"  value="#ffffff"/>
-            <column  name="parents"  value="false"/>
-        </insert>
-        <insert  catalogName="cat"
-                 schemaName="admin"
-                 tableName="menu">
-            <column  name="label"  value="groupe"/>
-            <column  name="urls"  value="admin/groupe"/>
-            <column  name="icon"  value="group"/>
-            <column  name="color"  value="#ffffff"/>
-            <column  name="parents"  value="false"/>
-        </insert>
-        <insert  catalogName="cat"
-                 schemaName="admin"
-                 tableName="menu">
-            <column  name="label"  value="utilisateurs"/>
-            <column  name="urls"  value="admin/users"/>
-            <column  name="icon"  value="supervised_user_circle"/>
-            <column  name="color"  value="#ffffff"/>
-            <column  name="parents"  value="false"/>
-        </insert>
-     </changeSet>
-
-    <changeSet id="0002-02" author="AKL">
-        <sql>
-            INSERT INTO admin.menu_groupe(
-            menu_id, groupe_id)
-            VALUES ((select id from admin.menu where label ='module'), (select id from admin.groupe where code ='Admin'))on conflict do nothing;
-        </sql>
-        <sql>
-            INSERT INTO admin.menu_groupe(
-            menu_id, groupe_id)
-            VALUES ((select id from admin.menu where label ='menu'), (select id from admin.groupe where code ='Admin'))on conflict do nothing;
-        </sql>
-        <sql>
-            INSERT INTO admin.menu_groupe(
-            menu_id, groupe_id)
-            VALUES ((select id from admin.menu where label ='groupe'), (select id from admin.groupe where code ='Admin'))on conflict do nothing;
-        </sql>
-        <sql>
-            INSERT INTO admin.menu_groupe(
-            menu_id, groupe_id)
-            VALUES ((select id from admin.menu where label ='utilisateurs'), (select id from admin.groupe where code ='Admin')) on conflict do nothing;
-        </sql>
-     </changeSet>
 
 </databaseChangeLog>
