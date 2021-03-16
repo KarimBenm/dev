@@ -16,18 +16,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class GdsApplication implements CommandLineRunner {
-    /*	@Autowired
+public class GdsApplication implements  CommandLineRunner {
+   	@Autowired
 	private UserService userService;
     	@Autowired
         private GroupeService groupeService;
     @Autowired
     private ModuleService moduleService;
-    */
+
 
    // @Bean
    // public ModelMapper modelMapper() {
@@ -40,13 +41,13 @@ public class GdsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.setProperty("webdriver.gecko.driver","C:\\Users\\Karim\\Desktop\\Lyes\\sel\\geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
-        driver.get("http://localhost:8080/angular");
-        driver.findElement(By.id("email")).sendKeys("lyes");
-        driver.findElement(By.id( "password")).sendKeys("*****");
-        WebElement btn = driver.findElement(By.id("login"));
-        btn.submit();
+       // System.setProperty("webdriver.gecko.driver","C:\\Users\\Karim\\Desktop\\Lyes\\sel\\geckodriver.exe");
+       // WebDriver driver = new FirefoxDriver();
+       // driver.get("http://localhost:8080/angular");
+       // driver.findElement(By.id("email")).sendKeys("lyes");
+      //  driver.findElement(By.id( "password")).sendKeys("*****");
+      //  WebElement btn = driver.findElement(By.id("login"));
+       // btn.submit();
 
         //moduleService.save(new ModuleDto("ADMIN01","ADMIN01","ADMIN01"));
        // moduleService.save(new ModuleDto("ADMIN02","ADMIN02","ADMIN02"));
@@ -62,9 +63,10 @@ public class GdsApplication implements CommandLineRunner {
       //  groupeService.save(new Groupe("Produit",moduleService.findByLabel("Produit")));
        // groupeService.save(new Groupe("DashBoard",moduleService.findByLabel("DashBoard")));
        // userService.saveUser(new User("admin","admin09"));
-        //userService.addGroupeToUser("admin","Facturation");
+       // userService.addGroupeToUser("admin","Admin");
+       // userService.addGroupeToUser("admin","Facturation");
        // userService.addGroupeToUser("admin","Stock");
        // userService.addGroupeToUser("admin","Produit");
-     //   userService.addGroupeToUser("admin","DashBoard");
+       // userService.addGroupeToUser("admin","DashBoard");
     }
 }

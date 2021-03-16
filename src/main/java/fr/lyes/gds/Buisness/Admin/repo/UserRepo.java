@@ -34,7 +34,6 @@ public class UserRepo implements Serializable {
         if (name != null && !name.equals("")) {
             st.append(" and  where module.name =:name");
         }
-        System.out.println("query builder" + st.toString());
         Query q = entityManger.createQuery(st.toString());
         if (code != null && !code.equals("")) {
             q.setParameter("code", code);
@@ -45,10 +44,8 @@ public class UserRepo implements Serializable {
         if (name != null && !name.equals("")) {
             q.setParameter("name", name);
         }
-        System.out.println("query builder After Param" + st.toString());
         q.setFirstResult(first);
         q.setMaxResults(max);
-        System.out.println("test Hibernate" + q.getResultList().size());
         return (List<User>) q.getResultList();
     }
 
@@ -60,7 +57,6 @@ public class UserRepo implements Serializable {
                 && firstName == null
                 && valid == null &&
                 email == null) {
-            System.out.println("all param are null" + lastName);
         } else {
             st.append("where");
             if (username != null && !username.equals("")) {

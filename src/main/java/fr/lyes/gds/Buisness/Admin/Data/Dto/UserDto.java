@@ -68,7 +68,6 @@ public class UserDto extends ParentDto<Long> implements Serializable {
     public UserDto() {
         super();
     }
-
     public UserDto(@NotNull String username, String password) {
         super();
         this.username = username;

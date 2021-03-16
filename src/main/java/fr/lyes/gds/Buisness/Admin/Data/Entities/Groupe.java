@@ -102,4 +102,5 @@ public class Groupe extends Parents<Long> implements Serializable {
 		this.module = module;
 	}
 
+
 }

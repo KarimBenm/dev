@@ -49,7 +49,6 @@ public class MailService {
          */
 
         SimpleMailMessage mail = new SimpleMailMessage();
-        System.out.println("wtf");
         mail.setTo(user.getEmail());
         mail.setSubject("Testing Mail API");
         mail.setText("Hurray ! You have done that dude...");
