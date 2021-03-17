@@ -22,7 +22,7 @@ export class MenuService extends GenericService<Menu> {
     super(http, API_URLS.Menus_API);
   }
   groupeDispo: Groupe[];
-  public host: string = "http://localhost:8080";
+  public host: string = "http://localhost:8080/gds";
 
   findByMenuLabel(label: String): Observable<Menu> {
     return this.getHttpClient().get<Menu>(

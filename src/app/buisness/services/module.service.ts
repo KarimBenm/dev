@@ -13,7 +13,7 @@ export class ModuleService extends GenericService<Module> {
   constructor(http: HttpClient) {
     super(http, API_URLS.Module_API);
   }
-  public host: string = "http://localhost:8080";
+  public host: string = "http://localhost:8080/gds";
 
   findAllCouleur(): Observable<string[]> {
     return this.getHttpClient().get<string[]>(

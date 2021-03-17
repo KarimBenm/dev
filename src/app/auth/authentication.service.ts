@@ -34,7 +34,7 @@ export class AuthenticationService {
   }
 
   public onLogin(credentials: FormGroup) {
-    return this.http.post(this.host + "/auth/login", {
+    return this.http.post(this.host + "/gds/auth/login", {
       username: credentials.value.username,
       password: credentials.value.password
     }).pipe(
@@ -70,7 +70,7 @@ export class AuthenticationService {
   }
   
   public onCreate(user: User):Observable<HttpResponse<User>>{
-    return this.http.post<User>(this.host + "/users/register", user, { observe: 'response' });
+    return this.http.post<User>(this.host + "/gds/users/register", user, { observe: 'response' });
   }
   public saveToken(jwt: string) {
     if (jwt !== null) {

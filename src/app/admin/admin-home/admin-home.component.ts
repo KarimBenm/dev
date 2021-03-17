@@ -39,6 +39,7 @@ export class AdminHomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("dfgdfg");
     this.sidenavService.setSidenav(this.sidenav);
     this.fillerNav = [];
     if (localStorage.getItem(PathName.TEST) !== undefined) {

@@ -16,7 +16,7 @@ export class UserService extends GenericService<User> {
   constructor(http: HttpClient) {
     super(http, API_URLS.User_API);
   }
-  public host: string = "http://localhost:8080";
+  public host: string = "http://localhost:8080/gds";
    saveDataE(model: UserTest,groupeList : Array<String>, editMode : boolean): Observable<User> {
     if (editMode) {
       return this.getHttpClient().put<User>( API_URLS.User_API +'/update',{
