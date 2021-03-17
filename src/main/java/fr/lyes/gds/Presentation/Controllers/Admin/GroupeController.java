@@ -11,6 +11,7 @@ import fr.lyes.gds.Buisness.Admin.service.Interfaces.GroupeService;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.MenuService;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.ModuleService;
 import fr.lyes.gds.Buisness.Admin.Data.payload.GroupeRequest;
+import fr.lyes.gds.Presentation.Utils.RequestConstants;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +26,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/groupes")
+@RequestMapping(RequestConstants.Groupe_REQUEST_MAPPING_ROOT)
 public class GroupeController implements Serializable {
 
 
@@ -44,17 +45,17 @@ public class GroupeController implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    @GetMapping(value = "/groupe/{codeGroupe}")
+    @GetMapping(value = RequestConstants.Groupe_Find_By_Code_REQUEST_MAPPING_ROOT)
     public Groupe findByGroupeCode(@PathVariable(value = "codeGroupe") String codeGroupe) {
         return service.findByCode(codeGroupe);
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = RequestConstants.Groupe_ALL_REQUEST_MAPPING_ROOT)
     public List<Groupe> findAllGroupes() {
         return service.findAll();
     }
 
-    @PutMapping(value = "/update")
+    @PutMapping(value = RequestConstants.Groupe_Update_REQUEST_MAPPING_ROOT)
     public @ResponseBody
     Groupe update(@RequestBody Groupe entity) {
         List<Menu> lmenu = new ArrayList<>();
@@ -80,7 +81,7 @@ public class GroupeController implements Serializable {
         return null;
     }
 
-    @GetMapping(value = "/pages")
+    @GetMapping(value = RequestConstants.Pages_REQUEST_MAPPING_ROOT)
     public Page<Groupe> findPageGroupe(@RequestParam(name = "code", required = false) String code,
                                        @RequestParam(name = "label", required = false) String label,
                                        @RequestParam(name = "active", required = false) Boolean active,
@@ -92,20 +93,20 @@ public class GroupeController implements Serializable {
         return mod;
     }
 
-    @GetMapping(value = "/dispo/{userName}")
-    public List<GroupeDto> findDispoGroupes(@PathVariable(value = "userName") String userName) {
+    @GetMapping(value = RequestConstants.Groupe_Disponible_REQUEST_MAPPING_ROOT)
+    public List<Groupe> findDispoGroupes(@PathVariable(value = "userName") String userName) {
         List<GroupeDto> groupeDtos = new ArrayList<>();
         List<Groupe> groupes = new ArrayList<>();
         groupes = service.findDispoGroupe(userName);
-        if (groupes != null && !groupes.isEmpty())
+        /*if (groupes != null && !groupes.isEmpty())
             groupes.forEach(x -> {
                 GroupeDto postDto = modelMapper.map(x, GroupeDto.class);
                 groupeDtos.add(postDto);
-            });
-        return groupeDtos;
+            });*/
+        return groupes;
     }
 
-    @GetMapping(value = "/sort")
+    @GetMapping(value = RequestConstants.Sort_Update_REQUEST_MAPPING_ROOT)
     public Page<Groupe> findAndSortPageGroupe(@RequestParam(name = "code", required = false) String code,
                                               @RequestParam(name = "label", required = false) String label,
                                               @RequestParam(name = "active", required = false) Boolean active,
@@ -127,17 +128,17 @@ public class GroupeController implements Serializable {
         // return service.findAndFilterPageLazyGroupes(code, label, active, page, size, sort, field);
     }
 
-    @GetMapping(value = "/test/{code}")
+    @GetMapping(value = RequestConstants.Groupe_Testing_REQUEST_MAPPING_ROOT)
     public List<Menu> findPageTest(@PathVariable(value = "code") String code) {
         return service.findMenuExclude(code);
     }
 
-    @GetMapping(value = "/count/{code}")
+    @GetMapping(value = RequestConstants.Groupe_Size_REQUEST_MAPPING_ROOT)
     public int findUsersOfGroupe(@PathVariable(value = "code") String code) {
         return service.findUsersOfGroupe(code).size();
     }
 
-    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = RequestConstants.Groupe_Create_REQUEST_MAPPING_ROOT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Groupe createGroupe(@RequestBody GroupeRequest entity) {
         Groupe newGroupe = new Groupe();
         newGroupe.setActive(entity.isActive());

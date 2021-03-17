@@ -11,6 +11,7 @@ import fr.lyes.gds.Buisness.Admin.Data.payload.MenuRequest;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.GroupeService;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.MenuService;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.UserService;
+import fr.lyes.gds.Presentation.Utils.RequestConstants;
 import fr.lyes.gds.Shared.GenericRestController;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/menus")
+@RequestMapping(RequestConstants.Menu_REQUEST_MAPPING_ROOT)
 public class MenuController implements Serializable {
 
     @Autowired
@@ -46,7 +47,7 @@ public class MenuController implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    @GetMapping(value = "/moduleMenus/{groupeId}")
+    @GetMapping(value = RequestConstants.Menu_Groupes_REQUEST_MAPPING_ROOT)
     public List<Menu> findByMenuCode(@PathVariable(value = "groupeId") Long groupeId) {
         List<MenuDto> menuDtos = new ArrayList<>();
         return service.findByMenuCode(groupeId);
@@ -57,19 +58,19 @@ public class MenuController implements Serializable {
         return service.findAllMenu();
     }
 
-    @GetMapping(value = "/sousMenu/{menuId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = RequestConstants.Menu_SousMenu_REQUEST_MAPPING_ROOT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Menu> listSousMenu(@PathVariable(value = "menuId") Long menuId) {
         return service.findAllSousMenu(menuId);
     }
 
-    @GetMapping(value = "/sousMenuDispo/{menuId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = RequestConstants.Menu_SousMenu_Disponible_REQUEST_MAPPING_ROOT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Menu> listSousMenuDispo(@PathVariable(value = "menuId") Long menuId) {
         List<Menu> listMenuDispo = new ArrayList<>();
         listMenuDispo = service.findAllSousMenu(menuId);
         return service.findSousMenuExclude(menuId, listMenuDispo);
     }
 
-    @GetMapping(value = "/search/{label}")
+    @GetMapping(value = RequestConstants.Menu_Search_REQUEST_MAPPING_ROOT)
     public Menu findByMenuLabel(@PathVariable(value = "label") String label) {
         return service.findByMenuLabel(label);
     }
@@ -79,7 +80,7 @@ public class MenuController implements Serializable {
         return opt.isPresent();
     }
 
-    @GetMapping(value = "/pages")
+    @GetMapping(value = RequestConstants.Pages_REQUEST_MAPPING_ROOT)
     public Page<Menu> findPageMenus(@RequestParam(name = "label", required = false) String label,
                                     @RequestParam(name = "url", required = false) String url,
                                     @RequestParam(name = "icon", required = false) String icon,
@@ -90,7 +91,7 @@ public class MenuController implements Serializable {
         return service.findPageLazyMenus(label, url, icon, parents, page, size);
     }
 
-    @GetMapping(value = "/sort")
+    @GetMapping(value = RequestConstants.Sort_Update_REQUEST_MAPPING_ROOT)
     public Page<Menu> findAndSortPageUser(@RequestParam(name = "label", required = false) String label,
                                           @RequestParam(name = "url", required = false) String url,
                                           @RequestParam(name = "icon", required = false) String icon,
@@ -110,7 +111,7 @@ public class MenuController implements Serializable {
         return service.findAndFilterPageLazyMenus(label, url, icon, parents, page, size, sort, field);
     }
 
-    @PutMapping(value = "/update")
+    @PutMapping(value = RequestConstants.Menu_Update_REQUEST_MAPPING_ROOT)
     public @ResponseBody
     Menu update(@RequestBody MenuRequest entity) {
         List<Menu> lmenu = new ArrayList<>();

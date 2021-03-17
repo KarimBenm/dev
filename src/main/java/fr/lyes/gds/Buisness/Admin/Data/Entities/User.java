@@ -7,6 +7,7 @@ import fr.lyes.gds.helpers.DBSchemaConstants;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -117,14 +118,13 @@ public class User implements Serializable {
         this.email = email;
         this.profilImage = profilImage;
     }
-    public User(UserTest userTest) {
+    public User(UserTest userTest)  {
         this.username = userTest.getUsername();
         this.password = userTest.getPassword();
         this.lastName = userTest.getLastName();
         this.firstName = userTest.getFirstName();
         this.address = userTest.getAddress();
         this.email = userTest.getEmail();
-        this.profilImage = userTest.getProfilImage();
         this.dateNaissance = userTest.getDateNaissance();
         this.sexe = userTest.getSexe();
         this.valid = userTest.getValid();
@@ -174,6 +174,14 @@ public class User implements Serializable {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public byte[] getProfilImage() {
+        return profilImage;
+    }
+
+    public void setProfilImage(byte[] profilImage) {
+        this.profilImage = profilImage;
     }
 
     public void setFirstName(String firstName) {

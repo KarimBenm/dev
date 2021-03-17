@@ -21,25 +21,16 @@ public class UserPrinciple implements UserDetails {
     private String email;
     private String firstName;
     private String lastName;
-    private String profilImage;
+    private byte[] profilImage;
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(Long id, String username, String password,String email,String firstName, String lastName,
-                         Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.authorities = authorities;
-    }
 
 
-    public UserPrinciple(Long id, String username, String firstName, String lastName, String password,
+
+    public UserPrinciple(Long id, String username, String firstName, String lastName, String password,byte[] imageProfile,
                          Collection<? extends GrantedAuthority> authorities) {
         super();
         this.id = id;
@@ -47,6 +38,7 @@ public class UserPrinciple implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.profilImage = imageProfile;
         this.authorities = authorities;
     }
 
@@ -82,7 +74,7 @@ public class UserPrinciple implements UserDetails {
         List<GrantedAuthority> authorities = user.getAppGroupeList().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toList());
         return new UserPrinciple(user.getId(), user.getUsername(), user.getFirstName(), user.getLastName(),
-                user.getPassword(), authorities);
+                user.getPassword(),user.getProfilImage(), authorities);
     }
 
     @Override
@@ -131,11 +123,11 @@ public class UserPrinciple implements UserDetails {
         return firstName;
     }
 
-    public String getImageProfile() {
+    public byte[] getImageProfile() {
         return profilImage;
     }
 
-    public void setImageProfile(String imageProfile) {
+    public void setImageProfile(byte[] imageProfile) {
         this.profilImage = imageProfile;
     }
 

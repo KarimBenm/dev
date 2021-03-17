@@ -8,9 +8,12 @@ import fr.lyes.gds.Buisness.Admin.Data.Entities.Module;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.User;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.GroupeService;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.UserService;
+import fr.lyes.gds.Presentation.Utils.ImageModel;
+import fr.lyes.gds.Presentation.Utils.RequestConstants;
 import fr.lyes.gds.Security.payload.request.CreateRequest;
 import fr.lyes.gds.Security.payload.request.SignUpRequest;
 import fr.lyes.gds.Security.payload.request.UserRequest;
+import fr.lyes.gds.Security.payload.response.MessageResponse;
 import fr.lyes.gds.Shared.MailService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +28,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,10 +43,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/users")
+@RequestMapping(RequestConstants.User_REQUEST_MAPPING_ROOT)
 public class UserController implements Serializable {
 
     @Autowired
@@ -63,7 +72,7 @@ public class UserController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @PostMapping(value = "/register", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = RequestConstants.User_Register_REQUEST_MAPPING_ROOT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     User create(@RequestBody User entity) {
         User user = service.findByUsername(entity.getUsername());
@@ -78,7 +87,7 @@ public class UserController implements Serializable {
     }
 
 
-    @RequestMapping(value = "/find/{username}", method = RequestMethod.GET, produces = {
+    @RequestMapping(value = RequestConstants.User_Find_REQUEST_MAPPING_ROOT, method = RequestMethod.GET, produces = {
             MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     UserDto findByUsername(@PathVariable(value = "username") String username) {
@@ -89,7 +98,7 @@ public class UserController implements Serializable {
         return null;
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET, produces = {
+    @RequestMapping(value = RequestConstants.User_Profile_REQUEST_MAPPING_ROOT, method = RequestMethod.GET, produces = {
             MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     User findProfileByUsername(@PathVariable(value = "username") String username) {
@@ -99,11 +108,12 @@ public class UserController implements Serializable {
         return null;
     }
 
-    @PutMapping(value = "/update",consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public User update(@RequestBody UserRequest entity) {
+    @PutMapping(value = RequestConstants.User_Update_REQUEST_MAPPING_ROOT, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public User update(@RequestBody UserRequest entity) throws IOException {
         if (nullCheck(entity.getUser().getId())) {
             User oldUser = service.findByUsername(entity.getUser().getUsername());
             List<Groupe> oldGroupe = new ArrayList<>();
+
             oldGroupe.addAll(oldUser.getAppGroupeList());
             User newUser = new User(entity.getUser());
             oldUser.setDateNaissance(newUser.getDateNaissance());
@@ -116,8 +126,8 @@ public class UserController implements Serializable {
             oldUser.setUsername(newUser.getUsername());
             if (entity.getGroupesList() != null) {
                 if (!entity.getGroupesList().isEmpty()) {
-                    entity.getGroupesList().forEach(x->{
-                        if(!oldGroupe.contains(x)){
+                    entity.getGroupesList().forEach(x -> {
+                        if (!customEquals(oldGroupe , x)) {
                             oldUser.getAppGroupeList().add(groupeService.findByCode(x));
                         }
                     });
@@ -125,14 +135,14 @@ public class UserController implements Serializable {
             }
             if (oldGroupe != null) {
                 if (!oldGroupe.isEmpty()) {
-                    oldGroupe.forEach(x->{
-                        if(!entity.getGroupesList().contains(x.getCode())){
+                    oldGroupe.forEach(x -> {
+                        if (!entity.getGroupesList().contains(x)) {
                             oldUser.getAppGroupeList().remove(x);
                         }
                     });
                 }
             }
-     String pass = oldUser.getPassword();
+            String pass = oldUser.getPassword();
             oldUser.setPassword(pass);
             return service.save(oldUser);
         }
@@ -140,7 +150,7 @@ public class UserController implements Serializable {
 
     }
 
-    @RequestMapping(value = "/pass/{userPass}/{username}", method = RequestMethod.GET, produces = {
+    @RequestMapping(value = RequestConstants.User_Find_UserName_REQUEST_MAPPING_ROOT, method = RequestMethod.GET, produces = {
             MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     boolean findPassByUsername(@PathVariable(value = "userPass") String userPass, @PathVariable(value = "username") String username) {
@@ -150,7 +160,7 @@ public class UserController implements Serializable {
         return false;
     }
 
-    @PutMapping(value = "/changePassword", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value = RequestConstants.User_Change_Password_REQUEST_MAPPING_ROOT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public User updateAndMore(@RequestBody User entity) {
         if (nullCheck(entity.getId())) {
             return service.saveUser(entity);
@@ -158,17 +168,17 @@ public class UserController implements Serializable {
         return service.save(entity);
     }
 
-    @GetMapping(value = "/getusers")
+    @GetMapping(value = RequestConstants.User_Get_Users_REQUEST_MAPPING_ROOT)
     public List<User> findAll() {
         return service.findAll();
     }
 
-    @GetMapping(value = "/getgroupes/{username}")
+    @GetMapping(value = RequestConstants.User_Groupes_REQUEST_MAPPING_ROOT)
     public List<Module> findGroupeOfUseres(@PathVariable(value = "username") String username) {
         return groupeService.findGroupeOfUser(username);
     }
 
-    @GetMapping(value = "/pages")
+    @GetMapping(value = RequestConstants.Pages_REQUEST_MAPPING_ROOT)
     public Page<UserDto> findPageUser(@RequestParam(name = "username", required = false) String username,
                                       @RequestParam(name = "lastName", required = false) String lastName,
                                       @RequestParam(name = "firstName", required = false) String firstName,
@@ -177,6 +187,7 @@ public class UserController implements Serializable {
                                       @RequestParam(name = "page") int page,
                                       @RequestParam(name = "size") int size
     ) {
+        System.out.println("test");
         PageRequest pageRequest = PageRequest.of(page, size);
         Page<User> mod = service.findPageLazyUsers(username, lastName, firstName, valid, email, page, size);
         List<UserDto> userDtos = new ArrayList<>();
@@ -187,7 +198,7 @@ public class UserController implements Serializable {
         return new PageImpl<UserDto>(userDtos, pageRequest, mod.getTotalElements());
     }
 
-    @GetMapping(value = "/sort")
+    @GetMapping(value = RequestConstants.Sort_Update_REQUEST_MAPPING_ROOT)
     public Page<UserDto> findAndSortPageUser(@RequestParam(name = "username", required = false) String username,
                                              @RequestParam(name = "lastName", required = false) String lastName,
                                              @RequestParam(name = "firstName", required = false) String firstName,
@@ -215,7 +226,27 @@ public class UserController implements Serializable {
         return new PageImpl<UserDto>(userDtos, pageRequest, mod.getTotalElements());
     }
 
-    @PostMapping(value = "/createUser", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/image/upload/{username}")
+    public ResponseEntity<?> createImage(@RequestParam("imageFile") MultipartFile file , @PathVariable("username") String username) throws IOException{
+        System.out.println("test");
+        User user = this.service.findByUsername(username);
+        if(user != null){
+            System.out.println("notnull");
+            user.setProfilImage(compressBytes(file.getBytes()));
+            this.service.save(user);
+            return ResponseEntity.ok(user);
+        }
+        System.out.println("null");
+        return ResponseEntity.badRequest()
+                .body(new MessageResponse("Error: f is already taken!"));
+    }
+
+    @GetMapping(value = "/showImage/{username}")
+    public ImageModel getImage(@PathVariable("username") String username) throws IOException{
+        ImageModel img = new ImageModel("test",decompressBytes(this.service.findByUsername(username).getProfilImage()));
+        return img;
+    }
+    @PostMapping(value = RequestConstants.User_Create_Users_REQUEST_MAPPING_ROOT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateRequest createRequest) {
         if (service.findByUsername(createRequest.getUsername()) != null) {
             /*return ResponseEntity
@@ -225,6 +256,7 @@ public class UserController implements Serializable {
             throw new RuntimeException("this userName is taken please provide another one");
 
         }
+
 
         //if (service.find(signUpRequest.getEmail())) {
             /*return ResponseEntity
@@ -299,4 +331,51 @@ public class UserController implements Serializable {
         String passGenerated = stringBuilder.toString();
         return passGenerated;
     }
+    // compress the image bytes before storing it in the database
+    public static byte[] compressBytes(byte[] data) {
+        Deflater deflater = new Deflater();
+        deflater.setInput(data);
+        deflater.finish();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        while (!deflater.finished()) {
+            int count = deflater.deflate(buffer);
+            outputStream.write(buffer, 0, count);
+        }
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+        }
+        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+        return outputStream.toByteArray();
+    }
+    // uncompress the image bytes before returning it to the angular application
+    public static byte[] decompressBytes(byte[] data) {
+        Inflater inflater = new Inflater();
+        inflater.setInput(data);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        try {
+            while (!inflater.finished()) {
+                int count = inflater.inflate(buffer);
+                outputStream.write(buffer, 0, count);
+            }
+            outputStream.close();
+        } catch (IOException ioe) {
+        } catch (DataFormatException e) {
+        }
+        return outputStream.toByteArray();
+    }
+    public boolean customEquals(List<Groupe> lgpe , String gpe) {
+        boolean contain = false;
+        for(Groupe x : lgpe){
+            if(x.getCode()!= null && gpe!= null ){
+                if(x.getCode().equals(gpe)){
+                    contain = true;
+                }
+            }
+        }
+        return contain;
+    }
 }
+

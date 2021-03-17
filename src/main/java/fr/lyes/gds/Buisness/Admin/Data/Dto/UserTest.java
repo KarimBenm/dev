@@ -4,6 +4,7 @@ import fr.lyes.gds.Buisness.Admin.Data.Entities.Groupe;
 import fr.lyes.gds.Shared.ParentDto;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
@@ -52,10 +53,6 @@ public class UserTest extends ParentDto<Long> implements Serializable {
     @Getter
     @Setter
     private String sexe;
-    @Getter
-    @Setter
-    @Lob
-    private byte[] profilImage;
 
     public UserTest() {
         super();
@@ -74,14 +71,13 @@ public class UserTest extends ParentDto<Long> implements Serializable {
         this.password = password;
     }
 
-    public UserTest(String username, String password, String lastName, String firstName, String address, String email, byte[] profilImage) {
+    public UserTest(String username, String password, String lastName, String firstName, String address, String email) {
         this.username = username;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
         this.email = email;
-        this.profilImage = profilImage;
     }
     @Override
     public String toString() {

@@ -35,6 +35,7 @@ public class UserDetailServicesImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username);
+        System.out.println("findUser"+user.getProfilImage());
 if (user == null)
             logger.error("user in UserDetailServicesImpl is null");
             new UsernameNotFoundException("User Not Found with -> username or email : " + username);

@@ -8,6 +8,7 @@ import fr.lyes.gds.Buisness.Admin.Data.Entities.Module;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.GroupeService;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.MenuService;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.ModuleService;
+import fr.lyes.gds.Presentation.Utils.RequestConstants;
 import fr.lyes.gds.Shared.GenericRestController;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/modules")
+@RequestMapping(RequestConstants.Module_REQUEST_MAPPING_ROOT)
 public class ModuleController  extends GenericRestController<ModuleService, ModuleDto, Long> {
 
     @Autowired
@@ -37,7 +38,7 @@ public class ModuleController  extends GenericRestController<ModuleService, Modu
 
     private static final long serialVersionUID = 1L;
 
-    @GetMapping(value = "/couleurs")
+    @GetMapping(value = RequestConstants.Module_Get_Couleurs_REQUEST_MAPPING_ROOT)
     public List<String> findAllCouleur() {
         return service.findAllCouleur();
     }
@@ -45,7 +46,7 @@ public class ModuleController  extends GenericRestController<ModuleService, Modu
     public List<Groupe> findGroupeByModule(@PathVariable(value = "code")String code) {
         return service.findByModule(code);
     }
-    @GetMapping(value = "/modules")
+    @GetMapping(value = RequestConstants.Module_REQUEST_MAPPING_ROOT)
     public List<ModuleDto> findAllModule(@RequestParam (name = "code",required = false) String code,
                                       @RequestParam(name = "label",required = false) String label,
                                       @RequestParam (name = "name", required = false) String name,
@@ -57,7 +58,7 @@ public class ModuleController  extends GenericRestController<ModuleService, Modu
         PageRequest pageRequest = PageRequest.of(f, m);
       return service.findAll(pageRequest);
     }
-    @GetMapping(value = "/pages")
+    @GetMapping(value = RequestConstants.Pages_REQUEST_MAPPING_ROOT)
     public Page<ModuleDto> findPageModule(@RequestParam (name = "code",required = false) String code,
                                          @RequestParam(name = "label",required = false) String label,
                                          @RequestParam (name = "name", required = false) String name,
@@ -73,7 +74,7 @@ public class ModuleController  extends GenericRestController<ModuleService, Modu
 
         return new PageImpl<ModuleDto>(moduleDtos, pageRequest, mod.getTotalElements());
     }
-    @GetMapping(value = "/sort")
+    @GetMapping(value = RequestConstants.Sort_Update_REQUEST_MAPPING_ROOT)
     public Page<ModuleDto> findAndSortPageModule(@RequestParam (name = "code",required = false) String code,
                                           @RequestParam(name = "label",required = false) String label,
                                           @RequestParam (name = "name", required = false) String name,
@@ -102,7 +103,7 @@ public class ModuleController  extends GenericRestController<ModuleService, Modu
       //          (Class<ModuleDto>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[2]);
       //  return dto;
     //}
-   @PutMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
+   @PutMapping(value = RequestConstants.Module_Update_REQUEST_MAPPING_ROOT,consumes = MediaType.APPLICATION_JSON_VALUE)
    public ModuleDto update(@RequestBody Module entity) {
        ModuleDto postDto = modelMapper.map(entity, ModuleDto.class);
        // ModuleDto mdt = new ModuleDto(entity);

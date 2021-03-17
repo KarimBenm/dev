@@ -1,5 +1,6 @@
 package fr.lyes.gds.AOP;
 
+import fr.lyes.gds.AOP.CustomExceptions.UserNotPresent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -91,6 +92,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
+     * Handles User not Found .
+     *
+     * @param
+     * @return the ApiError object
+     */
+    @ExceptionHandler(UserNotPresent.class)
+    protected ResponseEntity<Object> handleUserNotPresent(
+          ) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
+        apiError.setMessage("The User doesn't exists");
+        return buildResponseEntity(apiError);
+    }
+    /**
      * Handles javax.validation.ConstraintViolationException. Thrown when @Validated fails.
      *
      * @param ex the ConstraintViolationException
@@ -104,7 +118,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         apiError.addValidationErrors(ex.getConstraintViolations());
         return buildResponseEntity(apiError);
     }
-
     /**
      * Handles EntityNotFoundException. Created to encapsulate errors with more detail than javax.persistence.EntityNotFoundException.
      *

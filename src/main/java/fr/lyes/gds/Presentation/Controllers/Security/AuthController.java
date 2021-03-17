@@ -1,10 +1,12 @@
 package fr.lyes.gds.Presentation.Controllers.Security;
 
 
+import fr.lyes.gds.AOP.CustomExceptions.UserNotPresent;
 import fr.lyes.gds.Buisness.Admin.Dao.GroupeDao;
 import fr.lyes.gds.Buisness.Admin.Dao.UserDao;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.Groupe;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.User;
+import fr.lyes.gds.Presentation.Utils.RequestConstants;
 import fr.lyes.gds.Security.data.UserPrinciple;
 import fr.lyes.gds.Security.jwt.JwtUtils;
 import fr.lyes.gds.Security.payload.request.LoginRequest;
@@ -34,7 +36,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(RequestConstants.Authentification_REQUEST_MAPPING_ROOT)
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -55,8 +57,12 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/login")
+    @PostMapping(RequestConstants.Authentification_Login_REQUEST_MAPPING_ROOT)
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+
+        if (userRepository.findByUsername(loginRequest.getUsername()) == null) {
+            throw new UserNotPresent();
+        }
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -71,10 +77,12 @@ public class AuthController {
                 userDetails.getEmail(),
                 userDetails.getFirstName(),
                 userDetails.getLastName(),
-                roles));
+                roles,
+                userDetails.getImageProfile()
+                ));
     }
 
-    @PostMapping("/signUp")
+    @PostMapping(RequestConstants.Authentification_SignUp_REQUEST_MAPPING_ROOT)
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             /*return ResponseEntity
@@ -95,7 +103,7 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(), encoder.encode(signUpRequest.getPassword()),
                 signUpRequest.getLastName(), signUpRequest.getFirstName(), signUpRequest.getAddress(),
-                signUpRequest.getEmail(),signUpRequest.getProfilImage()
+                signUpRequest.getEmail(), signUpRequest.getProfilImage()
         );
         user.setAppGroupeList(new ArrayList<>());
         user.setValid(false);
