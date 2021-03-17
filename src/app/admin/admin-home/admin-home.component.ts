@@ -21,39 +21,44 @@ import { PathName } from 'src/app/helpers/path-name';
 export class AdminHomeComponent implements OnInit {
   @Input() img: string;
   user: User;
+  url : string;
   @ViewChild('sidenav') public sidenav: MatSidenav;
-  currentGroupe : Groupe;
-  fillerNav : Menu[];
+  currentGroupe: Groupe;
+  fillerNav: Menu[];
   options: FormGroup;
-  constructor(private authService: AuthenticationService,  private router : Router, 
-    private headerService : HeaderService,
+  constructor(private authService: AuthenticationService, private router: Router,
+    private headerService: HeaderService,
     private sidenavService: SidenavService,
-    private groupeService : GroupeService,
-    private userService: UserService,fb: FormBuilder) {
-      this.options = fb.group({
-        bottom: 0,
-        fixed: false,
-        top: 0
-      });
-     }
-    
+    private groupeService: GroupeService,
+    private userService: UserService, fb: FormBuilder) {
+    this.options = fb.group({
+      bottom: 0,
+      fixed: false,
+      top: 0
+    });
+  }
+
   ngOnInit() {
     this.sidenavService.setSidenav(this.sidenav);
     this.fillerNav = [];
-    if(localStorage.getItem(PathName.USER_CURRENT)!== undefined){
-      this.user =  this.authService.getCurrentUser();
+    if (localStorage.getItem(PathName.TEST) !== undefined) {
+      console.log("000");
+this.url = localStorage.getItem(PathName.TEST);
+    }
+    if (localStorage.getItem(PathName.USER_CURRENT) !== undefined) {
+      this.user = this.authService.getCurrentUser();
       this.img = this.user.profilImage;
-          localStorage.setItem(PathName.IMG_PROFILE, this.img);
-          this.groupeService.findByGroupeCode("Admin").subscribe(
-            data =>{
-              this.currentGroupe = data;
-              this.headerService.findMenuByUser(this.currentGroupe.id).subscribe(data =>{
-                data.forEach(x=>this.fillerNav.push(x));
-              }
-              );
-            }
-            );
-  }
+      localStorage.setItem(PathName.IMG_PROFILE, this.img);
+      this.groupeService.findByGroupeCode("Admin").subscribe(
+        data => {
+          this.currentGroupe = data;
+          this.headerService.findMenuByUser(this.currentGroupe.id).subscribe(data => {
+            data.forEach(x => this.fillerNav.push(x));
+          }
+          );
+        }
+      );
+    }
   }
   public goWithRouter(routers: string) {
     this.router.navigate([routers]);

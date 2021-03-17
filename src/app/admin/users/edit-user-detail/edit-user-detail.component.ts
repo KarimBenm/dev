@@ -28,6 +28,7 @@ export class EditUserDetailComponent implements OnInit {
   user: User;
   userTest: UserTest;
   url: string;
+  retreivedImg: any;
   active: boolean;
   signUpForm: FormGroup;
   presPass: string;
@@ -41,11 +42,16 @@ export class EditUserDetailComponent implements OnInit {
   fruitCtrl = new FormControl();
   selectedState: string;
   selectedInputGroupe: Groupe;
+  selectedFile: File;
   testPass: boolean = false;
   never: boolean = false;
   changePass: boolean = false;
   minDate: Date;
-  maxDate: Date
+  maxDate: Date;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
+  uploadImgData = new FormData();
 
   @ViewChild('groupeInput') groupeInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -95,7 +101,7 @@ export class EditUserDetailComponent implements OnInit {
         .appGroupeListDispo));
   }
   ngOnInit() {
-    this.url = this.user.profilImage;
+    this.url = 'data:image/jpeg;base64,'+this.user.profilImage;
     this.genders.push({ code: GenderUser.MALE, icon: "perm_identity" });
     this.genders.push({ code: GenderUser.FEMALE, icon: "pregnant_woman" });
     this.genders.push({ code: GenderUser.OTHER, icon: "help" });
@@ -228,11 +234,22 @@ export class EditUserDetailComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
+      this.selectedFile = event.target.files[0];
+      const uploadImageData = new FormData();
+      uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+      this.uploadImgData = new FormData();
+      this.uploadImgData.append('imageFile', this.selectedFile, this.selectedFile.name);
+      // //Make a call to the Spring Boot Application to save the image
+      // this.usersService.saveImage(uploadImageData).subscribe((response) => {
+      //   this.retreivedImg = response;
+      //   console.log("this.retreivedImg"+ this.selectedFile);
+      // }
+      // );
       let reader = new FileReader();
-      this.signUpForm.controls['image'].setValue(file);
+      this.signUpForm.controls['image'].setValue(uploadImageData);
       reader.readAsDataURL(file);
       reader.onloadend = (e) => {
-        this.signUpForm.get('image').setValue(reader.result.toString().split(',')[1]);
+        this.signUpForm.get('image').setValue(uploadImageData);
         this.url = reader.result.toString();
       };
     }
@@ -272,12 +289,25 @@ export class EditUserDetailComponent implements OnInit {
     } else {
       this.usersService.saveDataE(this.userTest, groupeTest, true).subscribe(
         () => {
-          this.messageService.openSnackBar("Creation of the user was a success", SEVERITY_TYPES.INFO_SEV);
+          this.usersService.saveImage(this.uploadImgData, this.userTest.username).subscribe(
+            () => {
+              this.usersService.showImage(this.userTest.username).subscribe(
+                (data) => {
+                  this.retrieveResonse = data;
+                  this.base64Data = this.retrieveResonse.picByte;
+                  this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+                  this.url =  this.retrievedImage;
+                  console.log("fockinh" + this.url);
+                  this.messageService.openSnackBar("EDITING of the user was a success", SEVERITY_TYPES.INFO_SEV);
+                  localStorage.setItem(PathName.TEST, this.url);
+                }
+              )
+            }
+          );
 
         }
       );
-      //localStorage.setItem(PathName.IMG_PROFILE, this.url);
-      //  this.router.navigateByUrl('home', { relativeTo: this.route });
+
     }
   }
   setActif() {

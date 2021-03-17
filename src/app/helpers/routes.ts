@@ -1,12 +1,15 @@
 export const API_URLS = {
 
-  User_API: "http://localhost:8080/gds/users",
-  Groupe_API: "http://localhost:8080/gds/groupes",
-  Module_API: "http://localhost:8080/gds/modules",
-  Register_API: "http://localhost:8080/gds/auth/register",
-  LOGOUT_API: "http://localhost:8080/gds/logout",
-  LOGIN_API: "gds/auth/login",
+  User_API: "http://localhost:8080/users",
   Menus_API: "http://localhost:8080/menus",
+  Groupe_API: "http://localhost:8080/groupes",
+  Module_API: "http://localhost:8080/modules",
+  Register_API: "http://localhost:8080/auth/register",
+  ShoppingIngredient_API: "http://localhost:8080/shopping_Ingredient",
+  ReceipeIngredient_API: "http://localhost:8080/ingredientsReceipe",
+  LOGOUT_API: "http://localhost:8080/logout",
+  LOGIN_API: "/auth/login",
+  ManagingUsers_API: "http://localhost:8080/ManagingUsers",
 
 
 

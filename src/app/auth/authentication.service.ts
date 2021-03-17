@@ -23,6 +23,9 @@ export class AuthenticationService {
   public host: string = "http://localhost:8080";
   private jwtToken = null;
   private currentUser: User;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
   private profileImg: string;
   loggedIn: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   private error  = new Subject();
@@ -87,6 +90,16 @@ export class AuthenticationService {
       this.userService.findUserByUserName(this.currentUser.username).subscribe(data => {
         this.loggedIn.next(data);
         localStorage.setItem(PathName.USER_CURRENT, JSON.stringify(data));
+        this.userService.showImage(this.currentUser.username).subscribe(
+          (data) : any =>{
+            this.retrieveResonse = data;
+                  this.base64Data = this.retrieveResonse.picByte;
+                  this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;          
+                  localStorage.setItem(PathName.TEST, this.retrievedImage);
+
+                }
+      
+    );
         this.router.navigateByUrl('home');
       });
   

@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { GenericService } from './generic-service';
 import { User } from '../models/User';
@@ -21,11 +21,19 @@ export class UserService extends GenericService<User> {
     if (editMode) {
       return this.getHttpClient().put<User>( API_URLS.User_API +'/update',{
         user : model,
-        groupesList : groupeList
+        groupesList : groupeList,
       }
        );
     }
   }
+  saveImage(uploadImageData: FormData , username :String) {
+   return  this.getHttpClient().post(API_URLS.User_API +'/image/upload/'+username, uploadImageData)
+ }
+
+  showImage(username: string) {
+    return  this.getHttpClient().get(API_URLS.User_API+'/showImage/'+username)
+ }
+    
   findUserByUserName(i: String): Observable<User> {
     return this.getHttpClient().get<User>(
       API_URLS.User_API + '/find/' + i

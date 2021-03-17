@@ -9,7 +9,7 @@ export class UserTest {
     sexe :string;
     ipAddress: string;
     dateNaissance : Date;
-    profilImage : string;
+    profilImage : any;
     admin: boolean;
     valid: boolean;
     phone: string;

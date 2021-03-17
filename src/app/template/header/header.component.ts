@@ -16,9 +16,12 @@ import { PathName } from 'src/app/helpers/path-name';
 export class HeaderComponent implements OnInit {
   isLoggedIn$: boolean;
   isAdmin: boolean;
-  url: string;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
+  url: String;
   isHome: boolean;
-  @Input() img: string;
+  @Input() img: any;
   user: User;
   datasource: Module[];
   groupesUser: Groupe[];
@@ -40,24 +43,35 @@ export class HeaderComponent implements OnInit {
       data => {
         this.user = this.authService.getCurrentUser();
         this.isLoggedIn$ = true;
-        this.img = this.user.profilImage;
+        this.url = this.img;
         localStorage.setItem(PathName.IMG_PROFILE, this.img);
         this.userService.findGroupeByUserName(this.user.username).subscribe(
           data => {
             this.datasource = data;
           }
         );
-      }
+        this.userService.showImage(this.authService.getCurrentUser().username).subscribe(
+          (data) : any =>{
+            this.retrieveResonse = data;
+                  this.base64Data = this.retrieveResonse.picByte;
+                  this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;          
+                  this.url =  this.retrievedImage;
+                  this.img = this.url;
+                  localStorage.setItem(PathName.TEST, this.img);
+                }
+      
     );
-    }
-onLogout() {
-  this.authService.onLogOut();
-}
+        }
+    );
+  }
+  onLogout() {
+    this.authService.onLogOut();
+  }
   public goWithRouter(routers: string) {
-  this.router.navigate([routers]);
-}
-toggleRightSidenav() {
-  this.sidenav.toggle();
-}
+    this.router.navigate([routers]);
+  }
+  toggleRightSidenav() {
+    this.sidenav.toggle();
+  }
 
 }
