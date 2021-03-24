@@ -1,6 +1,8 @@
 version: '3'
 services:
 
+
+
   gds-postgres:
     image: "postgres:11-alpine"
     container_name: gds-postgres
@@ -16,6 +18,7 @@ services:
   gds-app:
     build: ./
     container_name: gds
+
     environment:
       - DB_SERVER= gds-postgres
       - POSTGRES_DB=Gds_db
@@ -31,4 +34,5 @@ services:
 
 
 volumes:
-  gds-data:
+        gds-data:
+
