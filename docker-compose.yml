@@ -1,0 +1,12 @@
+version: '3'
+services:
+ gds-front:
+    build: C:\Users\Karim\Desktop\ProdProjects\prod21_02_21\GDS-front
+    container_name: gds-front
+    ports:
+     - 4200:80
+    volumes:
+      - gds-ng:/GDS-front
+
+volumes:
+        gds-ng:

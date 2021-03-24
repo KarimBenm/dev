@@ -34,6 +34,8 @@ export class AuthenticationService {
   }
 
   public onLogin(credentials: FormGroup) {
+    console.log("gfdggfd");
+    console.log("gfdggfd000000");
     return this.http.post(this.host + "/gds/auth/login", {
       username: credentials.value.username,
       password: credentials.value.password

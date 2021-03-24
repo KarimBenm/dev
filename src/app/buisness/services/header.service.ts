@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Menu } from '../models/menu';
-import { PathName } from 'src/app/helpers/path-name';
+import { Menu } from '../models/Menu';
 
 const header_api: string = "http://localhost:8080/gds/menus";
 
@@ -13,7 +12,6 @@ export class HeaderService {
   constructor(private http: HttpClient) { }
 
   public findMenuByUser(groupeId: number) {
-    console.log("dfgdfg");
     return this.http.get<Menu[]>("http://localhost:8080/gds/menus/moduleMenus/" + groupeId);
   }
 }
