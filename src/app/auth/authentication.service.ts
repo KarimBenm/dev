@@ -34,8 +34,6 @@ export class AuthenticationService {
   }
 
   public onLogin(credentials: FormGroup) {
-    console.log("gfdggfd");
-    console.log("gfdggfd000000");
     return this.http.post(this.host + "/gds/auth/login", {
       username: credentials.value.username,
       password: credentials.value.password
@@ -154,9 +152,7 @@ export class AuthenticationService {
 
   getTokenExpirationDate(token: string): Date {
     const decoded = jwt_decode(token);
-
     if (decoded.exp === undefined) return null;
-
     const date = new Date(0);
     date.setUTCSeconds(decoded.exp);
     return date;
