@@ -3,7 +3,7 @@ WORKDIR /usr/src/front
 COPY package.json ./
 RUN npm install
 COPY . .
-RUN npm run-script build --prod --base-href=gdsFront --aot
+RUN npm run-script build
 
 FROM nginx:alpine
 COPY --from=build /usr/src/front/dist/ /usr/share/nginx/html
