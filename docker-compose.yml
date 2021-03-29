@@ -1,7 +1,7 @@
 version: '3'
 services:
  gds-front:
-    build: ./
+    build: ./GDS-front
     container_name: gds-front
     ports:
      - 4200:80
