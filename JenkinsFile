@@ -17,10 +17,12 @@ bat  'docker-compose up'
 }
 }
 stage('Deploy'){
+        steps{
       script {
              docker.withRegistry('' , 'dockerhub') {
                         dockerImage.push()
                     }
+}
 }
  }
  }
