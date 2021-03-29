@@ -1,39 +1,16 @@
  pipeline {
                     agent any
-
-                   
  stages{
+
 stage('SCM Checkout'){
      steps{
-git branch: 'dev', changelog: false, credentialsId: '1ce8f45f-2f58-450d-8462-32bfda5ee059', url: 'https://github.com/KarimBenm/prod'
-}
-}
-
-stage('Cleaning'){
-     steps{
- bat  'mvn clean'
-     }
-}
-stage('Compiling'){
-     steps{
- bat  'mvn compile'}
+git branch: 'dev', changelog: false, credentialsId: '1ce8f45f-2f58-450d-8462-32bfda5ee059', url: 'https://github.com/KarimBenm/prod'}
 }
 
-stage('Testing'){
+stage('Build'){
      steps{
- bat  'mvn test'
-     }
+bat  'docker-compose up'
 }
-stage('Packaging'){
-     steps{
- bat  'mvn package'
-     }
 }
-stage('Deploying'){
-     steps{
-deploy adapters: [tomcat9(credentialsId: '0f039732-4ddb-4c9e-8fb2-bd302e8a7393', path: '', url: 'http://localhost:8080/')], contextPath: '/gds', war: '**/*.war'
-}
-         
-     }
 }
 }
