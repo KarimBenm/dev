@@ -16,7 +16,7 @@ COPY --from=build /app/context.xml /usr/local/tomcat/webapps/manager/META-INF/co
 COPY --from=build /app/target/gds.war /usr/local/tomcat/webapps/gds.war
 
 FROM gds-front_gds-front
-COPY /GDS-front /usr/local/tomcat/webapps/GDS-front
+COPY /usr/share/nginx/html /usr/local/tomcat/webapps/GDS-front
 
 
 
