@@ -1,8 +1,6 @@
  
  pipeline {
-                    agent any
-
-                   
+                    agent any              
  stages{
  
 stage('SCM Checkout'){
@@ -10,7 +8,6 @@ stage('SCM Checkout'){
 git branch: 'master', changelog: false, credentialsId: '1ce8f45f-2f58-450d-8462-32bfda5ee059', url: 'https://github.com/KarimBenm/dev'
 }
 }
-
 stage('Build'){
      steps{
 bat  'docker-compose up'
