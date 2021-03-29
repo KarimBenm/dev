@@ -16,5 +16,23 @@ stage('Build'){
 bat  'docker-compose up'
 }
 }
+stage('Deploy our image') {
+            steps {
+15
+                script {
+16
+                    // Assume the Docker Hub registry by passing an empty string as the first parameter
+17
+                    docker.withRegistry('' , 'dockerhub') {
+18
+                        dockerImage.push()
+19
+                    }
+20
+                }
+21
+            }
+22
+        }
 }
  }
