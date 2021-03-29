@@ -14,9 +14,7 @@ RUN  mv /usr/local/tomcat/webapps.dist /usr/local/tomcat/webapps
 COPY --from=build  /app/tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 COPY --from=build /app/context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
 COPY --from=build /app/target/gds.war /usr/local/tomcat/webapps/gds.war
-
-FROM karimlyes/gds-front As br
-COPY --from=br /usr/share/nginx/html /usr/local/tomcat/webapps/GDS-front
+COPY --from=karimlyes/gds-front /GDS-front /usr/local/tomcat/webapps/GDS-front
 
 
 
