@@ -19,11 +19,8 @@ bat  'docker-compose up'
 stage('Deploy'){
       script {
              docker.withRegistry('' , 'dockerhub') {
-18
                         dockerImage.push()
-19
                     }
 }
- }
  }
  }
