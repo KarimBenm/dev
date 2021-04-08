@@ -11,6 +11,10 @@ stage('Build'){
      steps{
 bat  'docker-compose up'
 }
+post {
+                always {
+                   junit '**/*.xml'
+                }
 }
 }
 }
