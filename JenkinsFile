@@ -12,9 +12,12 @@ stage('Build'){
 bat  'docker-compose up'
 }
 }
-post {
-                always {
-                   junit '**/*.xml'
-                }
+stage ('Deploy') {
+
+withCredentials([string(credentialsId: 'dockerHub', variable: 'dockerhubaccount')]) {
+bat "docker login -u karim01 -p ${dockerhubaccount}"
+}
+bat 'docker push karim01/gds:1.0.0'
+}
 }
 }
