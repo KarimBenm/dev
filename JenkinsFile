@@ -13,11 +13,12 @@ bat  'docker-compose up'
 }
 }
 stage ('Deploy') {
-
+ steps{
 withCredentials([string(credentialsId: 'dockerHub', variable: 'dockerhubaccount')]) {
 bat "docker login -u karim01 -p ${dockerhubaccount}"
 }
 bat 'docker push karim01/gds:1.0.0'
+}
 }
 }
 }
