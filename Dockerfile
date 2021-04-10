@@ -6,11 +6,6 @@ COPY context.xml /app
 COPY pom.xml /app
 COPY src /app/src
 RUN mvn -f pom.xml clean package
-RUN mvn  clean install
-
-
-
-
 
 
 
