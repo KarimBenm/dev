@@ -1,0 +1,73 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="AKL" id="0005-01">
+        <sql>
+            CREATE SCHEMA produit
+        </sql>
+        <createTable tableName="produit" schemaName="produit">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"
+                             primaryKeyName="produit_pk"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="sousFamille_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="BYTEA"/>
+            <column name="code_Barre" type="VARCHAR(100)"/>
+        </createTable>
+        <createTable tableName="famille" schemaName="produit">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"
+                             primaryKeyName="famille_pk"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="BYTEA"/>
+        </createTable>
+
+        <createTable tableName="sousFamille" schemaName="produit">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"
+                             primaryKeyName="sousFamille_pk"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="famille_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="BYTEA"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseColumnNames="sousFamille_id" baseTableName="produit"
+                baseTableSchemaName="produit" constraintName="produit_sousFamille_fk"
+                deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
+                onUpdate="NO ACTION" referencedTableSchemaName="produit"
+                referencedColumnNames="id" referencedTableName="sousFamille"/>
+
+        <addForeignKeyConstraint
+                baseColumnNames="famille_id" baseTableName="sousFamille"
+                baseTableSchemaName="produit" constraintName="famille_sousFamille_fk"
+                deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
+                onUpdate="NO ACTION" referencedTableSchemaName="produit"
+                referencedColumnNames="id" referencedTableName="famille"/>
+    </changeSet>
+</databaseChangeLog>

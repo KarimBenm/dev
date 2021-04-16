@@ -1,4 +1,4 @@
-package Selenium.Junit;
+/*package Selenium.Junit;
 
 
 
@@ -42,6 +42,6 @@ public class UserWebPageTest  {
     }
 
 }
-
+*/
 
 

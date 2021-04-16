@@ -9,7 +9,7 @@ git branch: 'dev', changelog: false, credentialsId: '1ce8f45f-2f58-450d-8462-32b
 
 stage('Build'){
      steps{
-bat  'docker-compose up'
+bat  'docker-compose up --build'
 }
 }
 stage ('Deploy') {
@@ -17,7 +17,7 @@ stage ('Deploy') {
 withCredentials([string(credentialsId: 'dockerHub', variable: 'dockerhubaccount')]) {
 bat "docker login -u karim01 -p ${dockerhubaccount}"
 }
-bat 'docker push karim01/gds:1.0.0'
+bat 'docker push  karimlyes/karim01/gds:1.0.0'
 }
 }
 }
