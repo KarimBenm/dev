@@ -1,6 +1,5 @@
-package fr.lyes.gds.Buisness.Admin.repo;
+package fr.lyes.gds.Buisness.Admin.Repository;
 
-import fr.lyes.gds.Buisness.Admin.Data.Entities.Module;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

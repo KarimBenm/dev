@@ -1,30 +1,17 @@
 package fr.lyes.gds.Presentation.Controllers.Admin;
 
 
-import fr.lyes.gds.Buisness.Admin.Data.Dto.GroupeDto;
 import fr.lyes.gds.Buisness.Admin.Data.Dto.MenuDto;
-import fr.lyes.gds.Buisness.Admin.Data.Dto.ModuleDto;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.Menu;
-import fr.lyes.gds.Buisness.Admin.Data.Entities.Module;
-import fr.lyes.gds.Buisness.Admin.Data.Entities.User;
 import fr.lyes.gds.Buisness.Admin.Data.payload.MenuRequest;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.GroupeService;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.MenuService;
-import fr.lyes.gds.Buisness.Admin.service.Interfaces.UserService;
 import fr.lyes.gds.Presentation.Utils.RequestConstants;
-import fr.lyes.gds.Shared.GenericRestController;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.io.Serializable;
 import java.util.ArrayList;

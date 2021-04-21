@@ -1,27 +1,11 @@
 package fr.lyes.gds;
 
-import fr.lyes.gds.Buisness.Admin.Data.Dto.ModuleDto;
-import fr.lyes.gds.Buisness.Admin.Data.Entities.Groupe;
-import fr.lyes.gds.Buisness.Admin.Data.Entities.User;
-import fr.lyes.gds.Buisness.Admin.service.Interfaces.GroupeService;
-import fr.lyes.gds.Buisness.Admin.service.Interfaces.ModuleService;
-import fr.lyes.gds.Buisness.Admin.service.Interfaces.UserService;
-import org.modelmapper.ModelMapper;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 @ComponentScan

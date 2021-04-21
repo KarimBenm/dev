@@ -1,4 +1,4 @@
-package fr.lyes.gds.Buisness.Admin.repo;
+package fr.lyes.gds.Buisness.Admin.Repository;
 
 import fr.lyes.gds.Buisness.Admin.Data.Entities.Menu;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.User;

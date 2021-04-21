@@ -3,7 +3,6 @@ package fr.lyes.gds.Security.service;
 
 
 import fr.lyes.gds.Buisness.Admin.Dao.UserDao;
-import fr.lyes.gds.Buisness.Admin.Data.Dto.ModuleDto;
 import fr.lyes.gds.Buisness.Admin.Data.Dto.UserDto;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.User;
 import fr.lyes.gds.Security.data.UserPrinciple;

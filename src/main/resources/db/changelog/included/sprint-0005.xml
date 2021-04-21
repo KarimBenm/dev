@@ -70,4 +70,23 @@
                 onUpdate="NO ACTION" referencedTableSchemaName="produit"
                 referencedColumnNames="id" referencedTableName="famille"/>
     </changeSet>
+    <changeSet author="AKL" id="0005-02">
+
+    <addColumn schemaName= "produit"
+               tableName="produit" >
+        <column name="label" type="varchar(150)"/>
+        <column name="active" type="boolean"/>
+    </addColumn>
+        <addColumn schemaName= "produit"
+                   tableName="sousFamille" >
+            <column name="label" type="varchar(150)"/>
+            <column name="active" type="boolean"/>
+        </addColumn>
+        <addColumn schemaName= "produit"
+                   tableName="famille" >
+            <column name="label" type="varchar(150)"/>
+            <column name="active" type="boolean"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
