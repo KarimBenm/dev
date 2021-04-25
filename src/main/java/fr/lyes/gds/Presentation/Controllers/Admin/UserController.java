@@ -136,7 +136,7 @@ public class UserController implements Serializable {
             if (oldGroupe != null) {
                 if (!oldGroupe.isEmpty()) {
                     oldGroupe.forEach(x -> {
-                        if (!entity.getGroupesList().contains(x)) {
+                        if (!entity.getGroupesList().contains(x.getCode())) {
                             oldUser.getAppGroupeList().remove(x);
                         }
                     });

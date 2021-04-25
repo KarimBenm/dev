@@ -27,6 +27,8 @@ public class UserDetailServicesImpl implements UserDetailsService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+
     private static final Logger logger = LoggerFactory.getLogger(UserDetailServicesImpl.class);
 
 
