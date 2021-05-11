@@ -5,11 +5,10 @@ import fr.lyes.gds.Buisness.Admin.Dao.ModuleDao;
 import fr.lyes.gds.Buisness.Admin.Data.Dto.ModuleDto;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.Groupe;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.Module;
-import fr.lyes.gds.Buisness.Admin.repo.ModuleRepo;
+import fr.lyes.gds.Buisness.Admin.Repository.ModuleRepo;
 import fr.lyes.gds.Buisness.Admin.service.Interfaces.ModuleService;
 import fr.lyes.gds.Shared.GenericServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,15 +35,8 @@ public class ModuleServiceImpl extends GenericServiceImpl<ModuleDao, Module,Modu
 
 	@Override
 	public List<Groupe> findByModule(String code) {
-			System.out.println("ffdg");
-			//List<Groupe> gpeList = new ArrayList<>();
-			//gpeList = dao.findGroupeOfUser(username);
 			List<Groupe> groupeList = new ArrayList<>();
 		groupeList = dao.findByModule(code);
-			System.out.println("size"+groupeList.size());
-			//gpeList.forEach(x->{
-			//	modList.add(x.getModule());
-			//});
 			return groupeList;
 	}
 

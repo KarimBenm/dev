@@ -1,6 +1,5 @@
-package fr.lyes.gds.Buisness.Admin.repo;
+package fr.lyes.gds.Buisness.Admin.Repository;
 
-import fr.lyes.gds.Buisness.Admin.Data.Dto.ModuleDto;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.Module;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

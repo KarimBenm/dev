@@ -1,6 +1,5 @@
-package fr.lyes.gds.Buisness.Admin.repo;
+package fr.lyes.gds.Buisness.Admin.Repository;
 
-import fr.lyes.gds.Buisness.Admin.Data.Entities.Module;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -106,7 +105,6 @@ public class UserRepo implements Serializable {
             q.setParameter("firstName", firstName);
         }
         if (valid != null) {
-            System.out.println("valid" + valid);
             q.setParameter("valid", valid);
         }
         if (email != null && !email.equals("")) {
@@ -133,7 +131,6 @@ public class UserRepo implements Serializable {
         } else {
             st.append("where");
             if (username != null && !username.equals("")) {
-                System.out.println("ff");
                 if(st.toString().endsWith("where")){
                     st.append(" user.username =:username");
                 }else{
@@ -181,7 +178,6 @@ public class UserRepo implements Serializable {
             q.setParameter("firstName", firstName);
         }
         if (valid != null) {
-            System.out.println("valid" + valid);
             q.setParameter("valid", valid);
         }
         if (email != null && !email.equals("")) {

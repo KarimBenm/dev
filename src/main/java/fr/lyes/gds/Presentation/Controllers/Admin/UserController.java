@@ -1,7 +1,6 @@
 package fr.lyes.gds.Presentation.Controllers.Admin;
 
 
-import fr.lyes.gds.Buisness.Admin.Data.Dto.GroupeDto;
 import fr.lyes.gds.Buisness.Admin.Data.Dto.UserDto;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.Groupe;
 import fr.lyes.gds.Buisness.Admin.Data.Entities.Module;
@@ -11,7 +10,6 @@ import fr.lyes.gds.Buisness.Admin.service.Interfaces.UserService;
 import fr.lyes.gds.Presentation.Utils.ImageModel;
 import fr.lyes.gds.Presentation.Utils.RequestConstants;
 import fr.lyes.gds.Security.payload.request.CreateRequest;
-import fr.lyes.gds.Security.payload.request.SignUpRequest;
 import fr.lyes.gds.Security.payload.request.UserRequest;
 import fr.lyes.gds.Security.payload.response.MessageResponse;
 import fr.lyes.gds.Shared.MailService;
@@ -36,13 +34,11 @@ import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;

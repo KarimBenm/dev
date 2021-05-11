@@ -1,0 +1,45 @@
+version: '3'
+services:
+
+
+
+  gds-postgres:
+    image: "postgres:11-alpine"
+    container_name: gds-postgres
+    volumes:
+      - gds-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB= Gds_db
+      - POSTGRES_USER= postgres
+      - POSTGRES_PASSWORD= admin
+
+  gds-front:
+      build: ../GDS-front
+      image: karimlyes/gds-front
+      container_name: gds-front
+      ports:
+         - 4200:80
+
+  gds-app:
+    build: ./
+    container_name: gds
+
+    environment:
+      - DB_SERVER= gds-postgres
+      - POSTGRES_DB=Gds_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+
+    ports:
+      - 8080:8080
+    links:
+      - gds-postgres
+
+
+
+
+volumes:
+        gds-data:
+

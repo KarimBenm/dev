@@ -1,4 +1,4 @@
-package Selenium.frontTest;
+/*package Selenium.frontTest;
 
 import Selenium.Junit.LoginWebPageTest;
 import Selenium.Junit.UserWebPageTest;
@@ -15,3 +15,4 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class FrontApplicationTest {
 
 }
+*/

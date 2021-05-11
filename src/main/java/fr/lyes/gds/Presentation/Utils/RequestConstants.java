@@ -42,6 +42,9 @@ public class RequestConstants {
     public static final String Menu_SousMenu_Disponible_REQUEST_MAPPING_ROOT = "/sousMenuDispo/{menuId}";
     public static final String Menu_Search_REQUEST_MAPPING_ROOT = "/search/{label}";
     public static final String Menu_Update_REQUEST_MAPPING_ROOT = "/update";
+    public static final String Sous_Famille_find_ONE_REQUEST_MAPPING_ROOT = "/find/{name}";
+    public static final String Sous_Famille_REQUEST_MAPPING_ROOT = "/sousFamille";
+
 
 
 

@@ -59,12 +59,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint
-                baseColumnNames="module_id" baseTableName="groupe"
-                baseTableSchemaName="admin" constraintName="module_groupe_fk"
-                deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
-                onUpdate="NO ACTION" referencedTableSchemaName="admin"
-                referencedColumnNames="id" referencedTableName="module"/>
         <createIndex indexName="groupe_label" schemaName="admin"
                      tableName="groupe">
             <column name="label" type="varchar(150)"/>
@@ -80,41 +74,6 @@
             </column>
             <column name="groupe_id" type="BIGINT">
                 <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="user_id, groupe_id"
-                       tableName="user_groupe" schemaName="admin"/>
-
-        <addForeignKeyConstraint
-                baseColumnNames="groupe_id" baseTableName="user_groupe"
-                baseTableSchemaName="admin" constraintName="user_groupe_groupe_fk"
-                deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
-                onUpdate="NO ACTION" referencedTableSchemaName="admin"
-                referencedColumnNames="id" referencedTableName="groupe"/>
-
-        <addForeignKeyConstraint
-                baseColumnNames="user_id" baseTableName="user_groupe"
-                baseTableSchemaName="admin" constraintName="user_groupe_user_fk"
-                deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
-                onUpdate="NO ACTION" referencedTableSchemaName="admin"
-                referencedColumnNames="id" referencedTableName="user"/>
-
-
-        <createTable tableName="menu" schemaName="admin">
-            <column autoIncrement="true" name="id" type="SERIAL">
-                <constraints primaryKey="true" nullable="false"
-                             primaryKeyName="menu_pk"/>
-            </column>
-            <column name="label" type="VARCHAR(100)"/>
-            <column name="routers" type="VARCHAR(100)"/>
-            <column name="urls" type="VARCHAR(255)"/>
-            <column name="icon" type="VARCHAR(100)"/>
-            <column name="color" type="VARCHAR(100)"/>
-            <column name="parents" type="boolean"/>
-            <column name="menu_id" type="integer">
-                <constraints foreignKeyName="menu_menu_fk"
-                             references="admin.menu(id)"/>
             </column>
         </createTable>
         <createTable tableName="module" schemaName="admin">
@@ -133,6 +92,29 @@
                 <constraints unique="true" nullable="false"/>
             </column>
         </createTable>
+        <addPrimaryKey columnNames="user_id, groupe_id"
+                       tableName="user_groupe" schemaName="admin"/>
+
+
+
+
+        <createTable tableName="menu" schemaName="admin">
+            <column autoIncrement="true" name="id" type="SERIAL">
+                <constraints primaryKey="true" nullable="false"
+                             primaryKeyName="menu_pk"/>
+            </column>
+            <column name="label" type="VARCHAR(100)"/>
+            <column name="routers" type="VARCHAR(100)"/>
+            <column name="urls" type="VARCHAR(255)"/>
+            <column name="icon" type="VARCHAR(100)"/>
+            <column name="color" type="VARCHAR(100)"/>
+            <column name="parents" type="boolean"/>
+            <column name="menu_id" type="integer">
+                <constraints foreignKeyName="menu_menu_fk"
+                             references="admin.menu(id)"/>
+            </column>
+        </createTable>
+
 
         <createTable tableName="menu_groupe" schemaName="admin">
             <column name="menu_id" type="BIGINT">
@@ -158,6 +140,221 @@
                 deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
                 onUpdate="NO ACTION" referencedTableSchemaName="admin"
                 referencedColumnNames="id" referencedTableName="menu"/>
+        <addForeignKeyConstraint
+                baseColumnNames="module_id" baseTableName="groupe"
+                baseTableSchemaName="admin" constraintName="module_groupe_fk"
+                deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
+                onUpdate="NO ACTION" referencedTableSchemaName="admin"
+                referencedColumnNames="id" referencedTableName="module"/>
+        <addForeignKeyConstraint
+                baseColumnNames="groupe_id" baseTableName="user_groupe"
+                baseTableSchemaName="admin" constraintName="user_groupe_groupe_fk"
+                deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
+                onUpdate="NO ACTION" referencedTableSchemaName="admin"
+                referencedColumnNames="id" referencedTableName="groupe"/>
 
+        <addForeignKeyConstraint
+                baseColumnNames="user_id" baseTableName="user_groupe"
+                baseTableSchemaName="admin" constraintName="user_groupe_user_fk"
+                deferrable="true" initiallyDeferred="true" onDelete="CASCADE"
+                onUpdate="NO ACTION" referencedTableSchemaName="admin"
+                referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet id="0002-01" author="AKL">
+        <addColumn catalogName="cat"
+                   schemaName= "admin"
+                   tableName="module" >
+            <column name="col"
+                    type="integer"/>
+
+            <column
+                    name="raw"
+                    type="integer" >
+            </column>
+        </addColumn>
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="menu">
+            <column  name="label"  value="module"/>
+            <column  name="urls"  value="admin/module"/>
+            <column  name="icon"  value="view_module"/>
+            <column  name="color"  value="#ffffff"/>
+            <column  name="parents"  value="false"/>
+        </insert>
+
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="menu">
+            <column  name="label"  value="menu"/>
+            <column  name="urls"  value="admin/menu"/>
+            <column  name="icon"  value="menu"/>
+            <column  name="color"  value="#ffffff"/>
+            <column  name="parents"  value="false"/>
+        </insert>
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="menu">
+            <column  name="label"  value="groupe"/>
+            <column  name="urls"  value="admin/groupe"/>
+            <column  name="icon"  value="group"/>
+            <column  name="color"  value="#ffffff"/>
+            <column  name="parents"  value="false"/>
+        </insert>
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="menu">
+            <column  name="label"  value="utilisateurs"/>
+            <column  name="urls"  value="admin/users"/>
+            <column  name="icon"  value="supervised_user_circle"/>
+            <column  name="color"  value="#ffffff"/>
+            <column  name="parents"  value="false"/>
+        </insert>
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="module">
+            <column  name="label"  value="Stock"/>
+            <column  name="urls"  value="stock"/>
+            <column  name="icon"  value="assignment"/>
+            <column  name="color"  value="#16499"/>
+            <column  name="code"  value="stock"/>
+            <column  name="name"  value="stock"/>
+            <column  name="col"  value="3"/>
+            <column  name="raw"  value="2"/>
+        </insert>
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="module">
+            <column  name="label"  value="ADMIN"/>
+            <column  name="urls"  value="admin"/>
+            <column  name="icon"  value="settings"/>
+            <column  name="color"  value="#ff7f50"/>
+            <column  name="code"  value="ADMIN"/>
+            <column  name="name"  value="ADMIN"/>
+            <column  name="col"  value="3"/>
+            <column  name="raw"  value="1"/>
+        </insert>
+
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="module">
+            <column  name="label"  value="Facturation"/>
+            <column  name="urls"  value="facturation"/>
+            <column  name="icon"  value="account_balance"/>
+            <column  name="color"  value="#000000"/>
+            <column  name="code"  value="facturation"/>
+            <column  name="name"  value="facturation"/>
+            <column  name="col"  value="1"/>
+            <column  name="raw"  value="2"/>
+        </insert>
+
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="module">
+            <column  name="label"  value="Produit"/>
+            <column  name="urls"  value="produit"/>
+            <column  name="icon"  value="store"/>
+            <column  name="color"  value="#d80073"/>
+            <column  name="code"  value="produit"/>
+            <column  name="name"  value="produit"/>
+            <column  name="col"  value="3"/>
+            <column  name="raw"  value="1"/>
+        </insert>
+        <insert  catalogName="cat"
+                 schemaName="admin"
+                 tableName="module">
+            <column  name="label"  value="DashBoard"/>
+            <column  name="urls"  value="dashboard"/>
+            <column  name="icon"  value="assessment"/>
+            <column  name="color"  value="#00aba9"/>
+            <column  name="code"  value="dashboard"/>
+            <column  name="name"  value="dashboard"/>
+            <column  name="col"  value="1"/>
+            <column  name="raw"  value="1"/>
+        </insert>
+
+    </changeSet>
+    <changeSet id="0003-01" author="AKL">
+        <sql>
+            INSERT INTO admin.groupe(
+            code, label, active, module_id)
+            VALUES ('Admin','Admin',true, (select id from admin.module where code ='ADMIN'))on conflict do nothing;
+        </sql>
+        <sql>
+            INSERT INTO admin.groupe(
+            code, label, active, module_id)
+            VALUES ('Facturation','Facturation',true, (select id from admin.module where code ='facturation'))on conflict do nothing;
+        </sql>
+        <sql>
+            INSERT INTO admin.groupe(
+            code, label, active, module_id)
+            VALUES ('Stock','Stock',true, (select id from admin.module where code ='stock'))on conflict do nothing;
+        </sql>
+        <sql>
+            INSERT INTO admin.groupe(
+            code, label, active, module_id)
+            VALUES ('Produit','Produit',true, (select id from admin.module where code ='produit'))on conflict do nothing;
+        </sql>
+        <sql>
+            INSERT INTO admin.groupe(
+            code, label, active, module_id)
+            VALUES ('DashBoard','DashBoard',true, (select id from admin.module where code ='dashboard'))on conflict do nothing;
+        </sql>
+    </changeSet>
+
+
+<changeSet author="AKL" id="0004-02">
+<addColumn catalogName="cat"
+           schemaName= "admin"
+           tableName="user" >
+    <column name="date_naissance" type="timestamp without time zone" />
+
+</addColumn>
+    <addColumn catalogName="cat"
+               schemaName= "admin"
+               tableName="user" >
+        <column name="sexe"
+                type="VARCHAR(25)"/>
+    </addColumn>
+</changeSet>
+<changeSet  author="AKL"  id="0004-03">
+<modifyDataType  catalogName="cat"
+                 columnName="profil_image"
+                 newDataType="BYTEA"
+                 schemaName="admin"
+                 tableName="user"/>
+<sql>
+    INSERT INTO admin.menu_groupe(
+    menu_id, groupe_id)
+    VALUES ((select id from admin.menu where label ='module' limit 1) , (select id from admin.groupe where code ='Admin'))on conflict do nothing;
+</sql>
+<sql>
+    INSERT INTO admin.menu_groupe(
+    menu_id, groupe_id)
+    VALUES ((select id from admin.menu where label ='menu' limit 1) , (select id from admin.groupe where code ='Admin'))on conflict do nothing;
+</sql>
+<sql>
+    INSERT INTO admin.menu_groupe(
+    menu_id, groupe_id)
+    VALUES ((select id from admin.menu where label ='groupe' limit 1) , (select id from admin.groupe where code ='Admin'))on conflict do nothing;
+</sql>
+<sql>
+    INSERT INTO admin.menu_groupe(
+    menu_id, groupe_id)
+    VALUES ((select id from admin.menu where label ='utilisateurs' limit 1), (select id from admin.groupe where code ='Admin')) on conflict do nothing;
+</sql>
+</changeSet>
+    <changeSet author="AKL"  id="0005-01">
+        <sql>
+            INSERT INTO admin.user(
+            username, password, last_name, first_name, address, valid, phone, email, sexe, date_naissance)
+            VALUES ('admin', '$2a$10$SRsfjJvc31rErn8PwAYywuFNoX0.hUzxPFpiFtpeJkVfXtjk6WmwK', 'benm','karim', 'cite 320/65 logements bt A3 num 04', true, '0698231188', 'rikmoo23@gmail.com',  'MALE', '1994-08-10 00:00:00')on conflict do nothing;
+        </sql>
+    </changeSet>
+    <changeSet author="AKL"  id="0006-01">
+        <sql>
+            INSERT INTO admin.user_groupe(
+            user_id, groupe_id)
+            VALUES ((select id from admin.user where username ='admin' limit 1) , (select id from admin.groupe where code ='Admin'))on conflict do nothing;
+        </sql>
     </changeSet>
 </databaseChangeLog>

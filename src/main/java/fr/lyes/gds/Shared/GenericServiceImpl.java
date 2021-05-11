@@ -20,7 +20,7 @@ public class GenericServiceImpl<S extends JpaRepository<O, T>, O extends Parents
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private ModelMapper modelMapper;
+	protected ModelMapper modelMapper;
 
 	@Autowired
 	protected S dao;

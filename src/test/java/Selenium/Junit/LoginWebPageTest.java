@@ -1,4 +1,4 @@
-package Selenium.Junit;
+/*package Selenium.Junit;
 
 
 import Selenium.PageModels.LoginPage;
@@ -53,5 +53,5 @@ public class LoginWebPageTest {
 
 }
 
-
+*/
 
